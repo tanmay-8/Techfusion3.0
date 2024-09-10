@@ -12,6 +12,7 @@ module.exports = {
               },
             fontFamily: {
                 title: ["Archivo Black", " sans-serif"],
+                body: ["Inter Tight", 'sans-serif'],
             },
             colors: {
                 primary: "#08090A",

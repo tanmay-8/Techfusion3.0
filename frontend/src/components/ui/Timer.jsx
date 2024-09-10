@@ -70,7 +70,7 @@ const Timer = () => {
     return (
         <div className="flex items-start justify-center w-full gap-1.5 count-down-main">
             <div className="timer">
-                <div className="rounded-xl bg-black/10 backdrop-blur- py-3 min-w-[96px] flex items-center justify-center flex-col gap-1 px-3 shadow-sm shadow-cyan-300">
+                <div className="rounded-xl bg-black/10 backdrop-blur- py-3 min-w-[72px] flex items-center justify-center flex-col gap-1 px-3 shadow-sm shadow-cyan-300">
                     <h3 className="countdown-element days font-manrope font-semibold text-2xl text-white text-center">
                         {countDownTime.days}
                     </h3>
@@ -81,7 +81,7 @@ const Timer = () => {
             </div>
 
             <div className="timer">
-                <div className="rounded-xl bg-black/10 backdrop-blur-xl py-3 min-w-[96px] flex items-center justify-center flex-col gap-1 px-3 shadow-sm shadow-cyan-300">
+                <div className="rounded-xl bg-black/10 backdrop-blur-xl py-3 min-w-[72px] flex items-center justify-center flex-col gap-1 px-3 shadow-sm shadow-cyan-300">
                     <h3 className="countdown-element hours font-manrope font-semibold text-2xl text-white text-center">
                         {countDownTime.hours}
                     </h3>
@@ -92,23 +92,23 @@ const Timer = () => {
             </div>
 
             <div className="timer">
-                <div className="rounded-xl bg-black/10 backdrop-blur-xl py-3 min-w-[96px] flex items-center justify-center flex-col gap-1 px-3 shadow-sm shadow-cyan-300">
+                <div className="rounded-xl bg-black/10 backdrop-blur-xl py-3 min-w-[72px] flex items-center justify-center flex-col gap-1 px-3 shadow-sm shadow-cyan-300">
                     <h3 className="countdown-element minutes font-manrope font-semibold text-2xl text-white text-center">
                         {countDownTime.minutes}
                     </h3>
                     <p className="text-lg fo uppercasent-normal text-white mt-1 text-center w-full">
-                        Minutes
+                        Min
                     </p>
                 </div>
             </div>
 
             <div className="timer">
-                <div className="rounded-xl bg-black/10 backdrop-blur-xl py-3 min-w-[96px] flex items-center justify-center flex-col gap-1 px-3 shadow-sm shadow-cyan-300">
+                <div className="rounded-xl bg-black/10 backdrop-blur-xl py-3 min-w-[72px] flex items-center justify-center flex-col gap-1 px-3 shadow-sm shadow-cyan-300">
                     <h3 className="countdown-element seconds font-manrope font-semibold text-2xl text-white text-center">
                         {countDownTime.seconds}
                     </h3>
                     <p className="text-lg fo uppercasent-normal text-white mt-1 text-center w-full">
-                        Seconds
+                        Sec
                     </p>
                 </div>
             </div>
