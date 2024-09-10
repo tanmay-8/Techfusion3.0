@@ -49,7 +49,7 @@ const About = () => {
                     Welcome to Techfusion 3.0!
                 </h2>
                 <p className="mt-4 text-lg font-body max-w-[900px]">
-                    Techfusion 2.0 is a celebration of technology, innovation,
+                    Techfusion 3.0 is a celebration of technology, innovation,
                     and creativity like never before. Hosted by SAIT, we are
                     thrilled to bring you an electrifying event that will leave
                     you amazed! This year's theme is the cosmos, honoring our
