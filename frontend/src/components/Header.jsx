@@ -54,7 +54,7 @@ export default function Header() {
                     <div className="md:hidden">
                         <button
                             onClick={toggleMenu}
-                            className="text-gray-100 hover:scale-105 focus:outline-none"
+                            className="text-gray-100 hover:scale-105 focus:outline-none mr-8"
                         >
                             <Menu className="h-6 w-6" />
                         </button>
@@ -62,8 +62,8 @@ export default function Header() {
                 </div>
             </div>
             {isMenuOpen && (
-                <div className="md:hidden bg-gray-800">
-                    <div className="container mx-auto px-4 py-2 space-y-2">
+                <div className="md:hidden ">
+                    <div className="flex flex-col items-center justify-center mx-auto px-4 py-2 space-y-6">
                         <Link
                             href="/"
                             className="block hover:scale-105 transition-all"
@@ -84,7 +84,7 @@ export default function Header() {
                         </Link>
                         <Link
                             href="/register"
-                            className="block bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md transition-all"
+                            className="border-cyan-800 hover:scale-105 transition-all border rounded-full text-white px-8 py-2 bg-black mt-6"
                         >
                             Register
                         </Link>

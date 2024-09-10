@@ -11,11 +11,11 @@ const Hero = () => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 // Check if the midpoint of the component is in view
-                setIsVisible(entry.intersectionRatio > 0.4);
+                setIsVisible(entry.intersectionRatio > 0.6);
             },
             {
                 root: null, // relative to the viewport
-                threshold: [0.4], // trigger when 50% of the component is in view
+                threshold: [0.6], // trigger when 50% of the component is in view
             }
         );
 
@@ -32,16 +32,17 @@ const Hero = () => {
 
     return (
         <motion.div
+            id="home"
             ref={heroRef}
             data-scroll
             data-scroll-section
-            data-scroll-speed="-.3"
+            data-scroll-speed="-.4"
             className="h-screen flex flex-col items-center justify-center space-y-16"
             initial={{ opacity: 0, y: -100, scale: 0.9 }}
             animate={{
                 opacity: isVisible ? 1 : 0,
-                y: isVisible ? 0 : -50,
-                scale: isVisible ? 1 : 0.95,
+                y: isVisible ? 0 : -100,
+                scale: isVisible ? 1 : 0.9,
             }}
             transition={{
                 duration: 0.8, // smoother and slightly faster

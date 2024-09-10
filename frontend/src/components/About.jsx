@@ -9,11 +9,11 @@ const About = () => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 
-                setIsVisible(entry.intersectionRatio > 0.4);
+                setIsVisible(entry.intersectionRatio > 0.3);
             },
             {
                 root: null,
-                threshold: [0.4], 
+                threshold: [0.3], 
             }
         );
 
@@ -42,7 +42,7 @@ const About = () => {
                 duration: 0.8,
                 ease: "easeInOut",
             }}
-            className="min-h-screen w-full flex justify-center items-center text-center text-white md:px-20 z-10"
+            className="h-screen w-full flex justify-center items-center text-center text-white md:px-20 z-10"
         >
             <div>
                 <h2 className="text-3xl font-bold font-title">
