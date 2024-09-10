@@ -11,7 +11,7 @@ const Event = () => {
                 </h3>
                 <p class="max-w-sm text-sm text-zinc-400/80">
                     All your data and finances in one place to provide quick
-                    answers and make decisions instantly.
+                    answers and make decisions instantly.   
                 </p>
             </div>
         </div>
