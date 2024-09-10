@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
 const App = () => {
-    const scroll = new LocomotiveScroll();
+    const scroll = typeof window !== "undefined" && new LocomotiveScroll({});
     return (
         <div className=" relative bg-primary font-main p-4 overflow-x-hidden">
             <div className="absolute inset-0 h-full w-full  bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
