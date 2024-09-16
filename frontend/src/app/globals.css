@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+*,html {
     overflow: -moz-scrollbars-none;
     /* Firefox */
     -ms-overflow-style: none;
@@ -19,7 +19,8 @@ html::-webkit-scrollbar {
 }
 
 @layer base {
-  :root {
+    :root {
         --radius: 0.5rem
     }
 }
+

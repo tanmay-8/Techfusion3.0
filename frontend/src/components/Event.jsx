@@ -36,14 +36,10 @@ const Event = ({ event, ind }) => {
                 x: isVisible ? 0 : ind % 2 === 0 ? -100 : 100,
             }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="flex w-[300px] md:w-[380px] min-h-[400px] flex-col overflow-hidden rounded-2xl bg-zinc-900/50 ring-1 ring-zinc-100/10"
+            className="flex w-[300px] md:w-[380px] min-h-[400px] flex-col overflow-hidden rounded-2xl bg-[#073c60]/50 ring-1 ring-zinc-[#156b92]/10"
         >
             <div className="relative mb-4 flex h-full w-full items-center justify-center overflow-hidden [mask:linear-gradient(black_70%,transparent)]">
-                <Image
-                    src={event.image}
-                    alt={event.title}
-                    height={300}
-                />
+                <Image src={event.image} alt={event.title} height={300} />
             </div>
             <div className="mt-auto w-full space-y-4 px-8 pb-8">
                 <h3 className="text-xl font-semibold text-zinc-200">

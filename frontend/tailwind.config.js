@@ -16,7 +16,7 @@ module.exports = {
     			body: ["Inter Tight", "sans-serif"]
     		},
     		colors: {
-    			primary: '#08090A'
+    			primary: '#0d1e2e'
     		},
     		borderRadius: {
     			lg: 'var(--radius)',

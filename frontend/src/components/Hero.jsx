@@ -37,7 +37,7 @@ const Hero = () => {
             data-scroll
             data-scroll-section
             data-scroll-speed="-.4"
-            className="h-screen flex flex-col items-center justify-center space-y-16"
+            className="h-screen flex flex-col items-center justify-center space-y-16 "
             initial={{ opacity: 0, y: -100, scale: 0.9 }}
             animate={{
                 opacity: isVisible ? 1 : 0,
