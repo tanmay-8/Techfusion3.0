@@ -49,7 +49,7 @@ const Sponsors = () => {
                 {sponsors.map((sponsor, index) => (
                     <div
                         key={index}
-                        className="w-40 h-40 md:w-48 md:h-48 rounded-lg shadow-lg flex items-center justify-center p-4"
+                        className="w-40 h-40 md:w-48 md:h-48 rounded-lg  flex items-center justify-center p-4"
 
                     >
                         <Image

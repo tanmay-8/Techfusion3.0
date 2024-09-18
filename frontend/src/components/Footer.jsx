@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Facebook, Twitter, Instagram, Linkedin, Github } from "lucide-react";
-import Image from "next/image";
 import Logo from "@/assets/sait.png";
+import Image from "next/image";
+import BottomImg from "@/assets/bottom.png";
 
 const Footer = () => {
     const footerRef = useRef(null);
@@ -40,22 +41,22 @@ const Footer = () => {
     ];
 
     const footerLinks = [
-        { text: "About Us", href: "#" },
-        { text: "Contact", href: "#" },
-        { text: "Privacy Policy", href: "#" },
-        { text: "Terms of Service", href: "#" },
+        { text: "Home", href: "#home" },
+        { text: "About Us", href: "#about" },
+        { text: "Events", href: "#events" },
+        { text: "Register", href: "#registerForm" },
     ];
 
     return (
         <motion.footer
             ref={footerRef}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : 50 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="bg-gray-900/10 text-gray-300 py-12 mt-32 font-body"
+            className="bg-[#1a3c5b]/30 shadow-lg shadow-[#132e47]/50 backdrop-blur-xl border-none rounded-2xl text-gray-300 py-12 mt-32 font-body m-4 overflow-hidden z-50 mb-40" 
         >
-            <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row gap-16 items-center md:items-start text-center   md:text-left md:justify-between">
+            <div className="container overflow-hidden mx-auto px-4">
+                <div className="flex flex-col md:flex-row gap-16 items-center md:items-start text-center md:text-left md:justify-between overflow-hidden">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={{
@@ -71,7 +72,7 @@ const Footer = () => {
                                 alt="SAIT"
                                 width={50}
                                 height={50}
-                            ></Image>
+                            />
                             <span>SAIT</span>
                         </h2>
                         <p className="mb-4">
@@ -93,10 +94,10 @@ const Footer = () => {
                         </div>
                     </motion.div>
                     <motion.div
-                        initial={{ opacity: 0, y: 50 }}
+                        initial={{ opacity: 0, x: -50 }}
                         animate={{
                             opacity: isVisible ? 1 : 0,
-                            y: isVisible ? 0 : 50,
+                            x: isVisible ? 0 : -50,
                         }}
                         transition={{ duration: 0.5, delay: 0.4 }}
                     >
@@ -106,12 +107,18 @@ const Footer = () => {
                         <ul className="space-y-2">
                             {footerLinks.map((link, index) => (
                                 <motion.li key={index} whileHover={{ x: 5 }}>
-                                    <Link
-                                        href={link.href}
+                                    <button
                                         className="hover:text-cyan-700 transition-colors duration-300"
+                                        onClick={() => {
+                                            document
+                                                .querySelector(link.href)
+                                                .scrollIntoView({
+                                                    behavior: "smooth",
+                                                });
+                                        }}
                                     >
                                         {link.text}
-                                    </Link>
+                                    </button>
                                 </motion.li>
                             ))}
                         </ul>
@@ -131,13 +138,13 @@ const Footer = () => {
                             <input
                                 type="email"
                                 placeholder="Enter your email"
-                                className="bg-gray-800 text-white px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-cyan-700 mb-2 sm:mb-0"
+                                className="bg-gray-800 text-white px-4 py-2 rounded-md md:rounded-r-none rounded-l-md focus:outline-none focus:ring-2 focus:ring-cyan-700 mb-2 sm:mb-0"
                                 required
                             />
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="bg-cyan-700 text-white px-4 py-2 rounded-r-md hover:bg-cyan-600 transition-colors duration-300"
+                                className="bg-cyan-700 text-white px-4 py-2 rounded-md md:rounded-l-md rounded-r-md hover:bg-cyan-600 transition-colors duration-300 "
                                 type="submit"
                             >
                                 Send
@@ -146,13 +153,16 @@ const Footer = () => {
                     </motion.div>
                 </div>
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: isVisible ? 1 : 0 }}
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{
+                        opacity: isVisible ? 1 : 0,
+                        x: isVisible ? 0 : -50,
+                    }}
                     transition={{ duration: 0.5, delay: 0.8 }}
                     className="mt-8 pt-8 border-t border-gray-800 text-center"
                 >
                     <p>
-                        &copy; {new Date().getFullYear()} SAIT . All rights
+                        &copy; {new Date().getFullYear()} SAIT. All rights
                         reserved.
                     </p>
                 </motion.div>

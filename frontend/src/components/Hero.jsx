@@ -36,7 +36,7 @@ const Hero = () => {
             ref={heroRef}
             data-scroll
             data-scroll-section
-            data-scroll-speed="-.4"
+            data-scroll-speed="-.2"
             className="h-screen flex flex-col items-center justify-center space-y-16 "
             initial={{ opacity: 0, y: -100, scale: 0.9 }}
             animate={{
@@ -51,7 +51,7 @@ const Hero = () => {
         >
             <div>
                 <h1 className="text-4xl md:text-8xl text-center text-white font-extrabold font-title mb-1">
-                    Techfusion&nbsp; 3.0
+                    Techfusion 3.0
                 </h1>
                 <h2 className="text-lg md:text-2xl text-center text-white font-medium font-title">
                     Students' Association of Information Technology WCE, Sangli

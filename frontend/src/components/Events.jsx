@@ -33,7 +33,7 @@ const Events = () => {
         },
     ];
     return (
-        <div >
+        <div className="mt-24" id="events">
             <h1 className="text-4xl font-bold text-center text-white py-8 font-title">
                 Events
             </h1>
