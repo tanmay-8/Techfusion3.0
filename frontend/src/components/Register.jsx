@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useForm, Controller, set, useWatch } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -12,17 +15,86 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { X } from "lucide-react";
+
+const CustomAlert = ({ isOpen, onClose, title, message, isSuccess }) => (
+    <AnimatePresence>
+        {isOpen && (
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
+            >
+                <motion.div
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.9, opacity: 0 }}
+                    className={`relative w-full max-w-md p-6 rounded-lg shadow-lg ${
+                        isSuccess ? "bg-cyan-600" : "bg-red-600"
+                    }`}
+                >
+                    <button
+                        onClick={onClose}
+                        className="absolute top-2 right-2 text-white hover:text-gray-200"
+                        aria-label="Close alert"
+                    >
+                        <X size={24} />
+                    </button>
+                    <h2 className="text-2xl font-bold mb-4 text-white">
+                        {title}
+                    </h2>
+                    <p className="text-white">{message}</p>
+                </motion.div>
+            </motion.div>
+        )}
+    </AnimatePresence>
+);
 
 export default function Register() {
+    const imageUploadApi =
+        process.env.NEXT_PUBLIC_BACKEND_URL + "/participant/uploadimage";
+    const formSubmitApi =
+        process.env.NEXT_PUBLIC_BACKEND_URL + "/participant/register";
     const formRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
-    const [selectedEvents, setSelectedEvents] = useState({
-        codeduet: false,
-        codecrush: false,
-        cloudverse: false,
-        bidtobuild: false,
-    });
     const [totalAmount, setTotalAmount] = useState(0);
+    const [alertState, setAlertState] = useState({
+        isOpen: false,
+        title: "",
+        message: "",
+        isSuccess: false,
+    });
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+        watch,
+    } = useForm({
+        defaultValues: {
+            name: "",
+            email: "",
+            whatsapp: "",
+            college: "",
+            year: "",
+            events: {
+                codeduet: false,
+                codecrush: false,
+                cloudverse: false,
+                bidtobuild: false,
+            },
+            transaction: "",
+            screenshot: null,
+        },
+    });
+
+    const selectedEvents = useWatch({
+        control,
+        name: "events",
+    });
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -53,29 +125,97 @@ export default function Register() {
             cloudverse: 100,
             bidtobuild: 80,
         };
-        const total = Object.entries(selectedEvents).reduce(
-            (sum, [event, isSelected]) => {
-                return isSelected ? sum + prices[event] : sum;
-            },
-            0
-        );
-        setTotalAmount(total);
+        const amount = Object.entries(selectedEvents)
+            .filter(([, isSelected]) => isSelected)
+            .reduce((acc, [event]) => acc + prices[event], 0);
+        setTotalAmount(amount);
     }, [selectedEvents]);
 
-    const handleEventChange = (event) => {
-        setSelectedEvents((prev) => ({
-            ...prev,
-            [event]: !prev[event],
-        }));
+    const onSubmit = async (data) => {
+        setIsLoading(true);
+        try {
+            const formData = new FormData();
+            formData.append("transactionImage", data.screenshot);
+            const res = await fetch(imageUploadApi, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    Accept: "application/json",
+                },
+            });
+
+            if (!res.ok) {
+                throw new Error("Image upload failed");
+            } else {
+                const image = await res.json();
+                let url = image.transactionLink;
+                const submitData = {
+                    name: data.name,
+                    email: data.email,
+                    phone: data.whatsapp,
+                    college: data.college,
+                    year: parseInt(data.year),
+                    events: Object.entries(data.events)
+                        .filter(([, isSelected]) => isSelected)
+                        .map(([event]) => {
+                            if (event === "codeduet") return "CodeDuet";
+                            if (event === "codecrush") return "CodeCrush";
+                            if (event === "cloudverse") return "CloudVerse";
+                            if (event === "bidtobuild") return "Bid2Build";
+                        }),
+                    amount: totalAmount,
+                    transactionLink: url,
+                    transactionID: data.transaction,
+                };
+                const response = await fetch(formSubmitApi, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(submitData),
+                });
+
+                if (!response.ok) {
+                    throw new Error("Registration failed");
+                } else {
+                    setAlertState({
+                        isOpen: true,
+                        title: "Registration Successful!",
+                        message:
+                            "Thank you for registering. We'll contact you soon.",
+                        isSuccess: true,
+                    });
+                }
+            }
+        } catch (e) {
+            setAlertState({
+                isOpen: true,
+                title: "Registration Failed",
+                message:
+                    "There was an error processing your registration. Please try again.",
+                isSuccess: false,
+            });
+        } finally {
+            setIsLoading(false);
+        }
     };
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-
+    const closeAlert = () => {
+        setAlertState((prev) => ({ ...prev, isOpen: false }));
     };
 
     return (
-        <div className="overflow-hidden w-full px-4 md:px-8 py-24 space-y-6 font-body flex flex-col justify-center items-center" id="registerForm">
+        <div
+            className="overflow-hidden w-full px-4 md:px-8 py-24 space-y-6 font-body flex flex-col justify-center items-center"
+            id="registerForm"
+        >
+            <CustomAlert
+                isOpen={alertState.isOpen}
+                onClose={closeAlert}
+                title={alertState.title}
+                message={alertState.message}
+                isSuccess={alertState.isSuccess}
+            />
             <motion.h1
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -91,7 +231,10 @@ export default function Register() {
                 transition={{ duration: 0.8, ease: "easeInOut" }}
                 className="w-full max-w-7xl"
             >
-                <div className="bg-[#1a3c5b]/30 shadow-lg shadow-[#132e47]/50 backdrop-blur-xl border-none rounded-2xl overflow-hidden">
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="bg-[#1a3c5b]/30 shadow-lg shadow-[#132e47]/50 backdrop-blur-xl border-none rounded-2xl overflow-hidden"
+                >
                     <div className="p-4 md:p-6 space-y-4 md:space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             {[
@@ -100,23 +243,43 @@ export default function Register() {
                                     label: "Name",
                                     placeholder:
                                         "Enter name of all team members",
+                                    validation: {
+                                        required: "Name is required",
+                                    },
                                 },
                                 {
                                     id: "email",
                                     label: "Email",
                                     placeholder: "Enter your email",
                                     type: "email",
+                                    validation: {
+                                        required: "Email is required",
+                                        pattern: {
+                                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                            message: "Invalid email address",
+                                        },
+                                    },
                                 },
                                 {
                                     id: "whatsapp",
                                     label: "WhatsApp No.",
                                     placeholder:
                                         "Your WhatsApp number (no country code)",
+                                    validation: {
+                                        required: "WhatsApp number is required",
+                                        pattern: {
+                                            value: /^[6-9]\d{9}$/,
+                                            message: "Invalid phone number",
+                                        },
+                                    },
                                 },
                                 {
                                     id: "college",
                                     label: "College Name",
                                     placeholder: "Your college name",
+                                    validation: {
+                                        required: "College name is required",
+                                    },
                                 },
                             ].map((field) => (
                                 <motion.div
@@ -157,12 +320,28 @@ export default function Register() {
                                     >
                                         {field.label}
                                     </Label>
-                                    <Input
-                                        id={field.id}
-                                        type={field.type || "text"}
-                                        placeholder={field.placeholder}
-                                        className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200 placeholder:text-gray-400"
+                                    <Controller
+                                        name={field.id}
+                                        control={control}
+                                        rules={field.validation}
+                                        render={({
+                                            field: { onChange, value },
+                                        }) => (
+                                            <Input
+                                                id={field.id}
+                                                type={field.type || "text"}
+                                                placeholder={field.placeholder}
+                                                className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200 placeholder:text-gray-400"
+                                                onChange={onChange}
+                                                value={value}
+                                            />
+                                        )}
                                     />
+                                    {errors[field.id] && (
+                                        <p className="text-red-500 text-sm">
+                                            {errors[field.id].message}
+                                        </p>
+                                    )}
                                 </motion.div>
                             ))}
                         </div>
@@ -178,26 +357,44 @@ export default function Register() {
                             <Label htmlFor="year" className="text-gray-200">
                                 Year of Study
                             </Label>
-                            <Select>
-                                <SelectTrigger className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200">
-                                    <SelectValue placeholder="Select year" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {[
-                                        "First Year",
-                                        "Second Year",
-                                        "Third Year",
-                                        "Fourth Year",
-                                    ].map((year, index) => (
-                                        <SelectItem
-                                            key={index + 1}
-                                            value={String(index + 1)}
-                                        >
-                                            {year}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                            <Controller
+                                name="year"
+                                control={control}
+                                rules={{
+                                    required:
+                                        "Please select your year of study",
+                                }}
+                                render={({ field }) => (
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
+                                        <SelectTrigger className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200">
+                                            <SelectValue placeholder="Select year" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {[
+                                                "First Year",
+                                                "Second Year",
+                                                "Third Year",
+                                                "Fourth Year",
+                                            ].map((year, index) => (
+                                                <SelectItem
+                                                    key={index + 1}
+                                                    value={String(index + 1)}
+                                                >
+                                                    {year}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                )}
+                            />
+                            {errors.year && (
+                                <p className="text-red-500 text-sm">
+                                    {errors.year.message}
+                                </p>
+                            )}
                         </motion.div>
                         <motion.div
                             initial={{ opacity: 0, y: 50 }}
@@ -238,12 +435,18 @@ export default function Register() {
                                         key={event.id}
                                         className="flex items-center space-x-2 bg-[#1a3c5b]/30 p-3 rounded-lg"
                                     >
-                                        <Checkbox
-                                            id={event.id}
-                                            checked={selectedEvents[event.id]}
-                                            onCheckedChange={() =>
-                                                handleEventChange(event.id)
-                                            }
+                                        <Controller
+                                            name={`events.${event.id}`}
+                                            control={control}
+                                            render={({ field }) => (
+                                                <Checkbox
+                                                    id={event.id}
+                                                    checked={field.value}
+                                                    onCheckedChange={
+                                                        field.onChange
+                                                    }
+                                                />
+                                            )}
                                         />
                                         <label
                                             htmlFor={event.id}
@@ -257,6 +460,13 @@ export default function Register() {
                                     </div>
                                 ))}
                             </div>
+                            {Object.values(selectedEvents).every(
+                                (v) => v === false
+                            ) && (
+                                <p className="text-red-500 text-sm">
+                                    Please select at least one event
+                                </p>
+                            )}
                         </motion.div>
                         <motion.div
                             initial={{ opacity: 0, y: 50 }}
@@ -301,11 +511,26 @@ export default function Register() {
                                 >
                                     Transaction Id
                                 </Label>
-                                <Input
-                                    id="transaction"
-                                    placeholder="Enter transaction ID"
-                                    className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200 placeholder:text-gray-400"
+                                <Controller
+                                    name="transaction"
+                                    control={control}
+                                    rules={{
+                                        required: "Transaction ID is required",
+                                    }}
+                                    render={({ field }) => (
+                                        <Input
+                                            {...field}
+                                            id="transaction"
+                                            placeholder="Enter transaction ID"
+                                            className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200 placeholder:text-gray-400"
+                                        />
+                                    )}
                                 />
+                                {errors.transaction && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.transaction.message}
+                                    </p>
+                                )}
                             </motion.div>
                             <motion.div
                                 initial={{ opacity: 0, y: 50 }}
@@ -322,11 +547,31 @@ export default function Register() {
                                 >
                                     Payment Screenshot
                                 </Label>
-                                <Input
-                                    id="screenshot"
-                                    type="file"
-                                    className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200 placeholder:text-gray-400 cursor-pointer"
+                                <Controller
+                                    name="screenshot"
+                                    control={control}
+                                    rules={{
+                                        required:
+                                            "Payment screenshot is required",
+                                    }}
+                                    render={({ field }) => (
+                                        <Input
+                                            id="screenshot"
+                                            type="file"
+                                            onChange={(e) =>
+                                                field.onChange(
+                                                    e.target.files[0]
+                                                )
+                                            }
+                                            className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200 placeholder:text-gray-400 cursor-pointer"
+                                        />
+                                    )}
                                 />
+                                {errors.screenshot && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.screenshot.message}
+                                    </p>
+                                )}
                             </motion.div>
                         </div>
                     </div>
@@ -341,16 +586,20 @@ export default function Register() {
                             className="w-full flex justify-center"
                         >
                             <Button
-                                onClick={(e) => {
-                                    onSubmit(e);
-                                }}
+                                disabled={isLoading}
+                                type="submit"
                                 className="w-full sm:w-auto px-8 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold text-lg rounded-lg transition-colors duration-300"
                             >
-                                Submit
+                                {
+                                    {
+                                        true: "Registering...",
+                                        false: "Register",
+                                    }[isLoading]
+                                }
                             </Button>
                         </motion.div>
                     </div>
-                </div>
+                </form>
             </motion.div>
         </div>
     );
