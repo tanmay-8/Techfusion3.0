@@ -40,14 +40,14 @@ const Sponsors = () => {
             <h1 className="text-2xl md:text-4xl font-bold text-center text-white font-title">
                 Our Sponsors
             </h1>
-            <motion.div 
+            <div 
                 ref={sponsorsRef}
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: isVisible ? 1 : 0, opacity: isVisible ? 1 : 0 }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
             className="flex  justify-center items-center gap-8 md:gap-12">
                 {sponsors.map((sponsor, index) => (
-                    <motion.div
+                    <div
                         key={index}
                         className="w-40 h-40 md:w-48 md:h-48 rounded-lg shadow-lg flex items-center justify-center p-4"
 
@@ -58,9 +58,9 @@ const Sponsors = () => {
                             width={100}
                             height={100}
                         />
-                    </motion.div>
+                    </div>
                 ))}
-            </motion.div>
+            </div>
         </div>
     );
 };

@@ -1,0 +1,284 @@
+@keyframes swim2 {
+    0% {
+        transform: translateY(3em) rotate(-45deg);
+    }
+
+    100% {
+        transform: translateY(-1000px) translateX(-100vw);
+    }
+}
+
+@keyframes squash2 {
+    20% {
+        transform: scaleY(0.9);
+    }
+
+    40% {
+        transform: scaleY(1.1);
+    }
+
+    60% {
+        transform: scaleY(0.9);
+    }
+}
+
+@keyframes wave2 {
+    30% {
+        transform: scaleX(var(--scaleX)) scaleY(var(--scaleY)) rotate(calc(var(--rotate) * -1deg));
+    }
+}
+
+.datouwang2 {
+    font-size: 4vmin;
+    position: absolute;
+    filter: drop-shadow(0 0 1em rgb(110, 18, 239));
+    height: 14em;
+    animation: swim2 60s ease-in-out infinite;
+    transform-origin: 50% 0;
+    transform: translateY(3em);
+    margin: 10px auto;
+    width: 200px;
+    top: 60%;
+    right: 10%;
+    z-index: 10;
+}
+
+.datouwang2 .arms2 {
+    transform-origin: 50% 0;
+    animation: squash2 10s ease-in-out infinite;
+}
+
+.datouwang2 .arms2 .arm2 {
+    position: absolute;
+    width: 2em;
+    height: 6em;
+    top: 3em;
+    border-radius: 50%;
+    border-left: 1em solid #f5ccff;
+    border-bottom: 0.3em solid transparent;
+    transform-origin: 50% 0;
+    opacity: 0.4;
+    transform: scaleX(var(--scaleX)) scaleY(var(--scaleY)) rotate(calc(var(--rotate) * 1deg));
+    animation: wave2 10s ease-in-out infinite;
+}
+
+.datouwang2 .arms2 .arm2:before {
+    content: '';
+    position: absolute;
+    width: 1.6em;
+    height: 3em;
+    top: 5.1em;
+    left: -1.5em;
+    border-radius: 50%;
+    border-right: 0.6em solid #f5ccff;
+    border-top: 0.3em solid transparent;
+    border-bottom: 0.3em solid transparent;
+    transform: rotate(-10.4deg);
+}
+
+.datouwang2 .arms2 .arm2:after {
+    content: '';
+    position: absolute;
+    width: 1em;
+    height: 2em;
+    top: 7.5em;
+    left: -0.05em;
+    border-radius: 50%;
+    border-top: 0.4em solid transparent;
+    border-left: 0.4em solid #f5ccff;
+    transform: rotate(10deg);
+}
+
+.datouwang2 .arms2 .arm2:nth-child(1) {
+    left: 2.2em;
+}
+
+.datouwang2 .arms2 .arm2:nth-child(2) {
+    left: 3em;
+}
+
+.datouwang2 .arms2 .arm2:nth-child(3) {
+    left: 3.6em;
+}
+
+.datouwang2 .arms2 .arm2:nth-child(4) {
+    left: 2.3em;
+}
+
+.datouwang2 .arms2 .arm2:nth-child(5) {
+    left: 3.8em;
+}
+
+.datouwang2 .arms2 .arm2:nth-child(6) {
+    left: 4.5em;
+}
+
+.datouwang2 .arms2 .arm2:nth-child(7) {
+    left: 3em;
+}
+
+.datouwang2 .arms2 .arm2:nth-child(8) {
+    left: 4.5em;
+}
+
+.datouwang2 .tentacles2 {
+    animation: squash2 10s ease-in-out infinite;
+}
+
+.datouwang2 .tentacles2 .tentacle2 {
+    position: absolute;
+    top: 4em;
+    width: 10em;
+    height: 8em;
+    border: 1px solid rgba(3, 92, 92, 0.6);
+    border-bottom: none;
+    border-top: none;
+    border-bottom-left-radius: 10% 50%;
+    border-bottom-right-radius: 10% 50%;
+    border-top-left-radius: 20% 50%;
+    border-top-right-radius: 20% 50%;
+}
+
+.datouwang2 .tentacles2 .tentacle2:nth-child(2) {
+    transform: scaleX(0.8);
+}
+
+.datouwang2 .tentacles2 .tentacle2:nth-child(3) {
+    transform: scaleX(0.6);
+}
+
+.datouwang2 .tentacles2 .tentacle2:nth-child(4) {
+    transform: scaleX(0.4);
+}
+
+.datouwang2 .tentacles2 .tentacle2:nth-child(5) {
+    transform: scaleX(0.2);
+}
+
+.datouwang2 .guts2 {
+    width: 4em;
+    height: 4em;
+    background: white;
+    position: absolute;
+    left: 3em;
+    top: 1em;
+    border-radius: 50%;
+    box-shadow: -1.5em 0.7em 0 -0.8em white, -1.7em -0.5em 0 -1.4em white, 1.8em -0.1em 0 -1.3em white, 1em 1em 0 -0.6em white, -0.4em 1.8em 0 -1.3em white, 1.4em -1em 0 -1.5em white, -1.3em 1.8em 0 -1.5em white;
+    filter: drop-shadow(0 0 0.5em rgba(255, 255, 255, 0.5));
+}
+
+.datouwang2 .body2 {
+    background: rgb(183, 0, 255);
+    width: 10em;
+    height: 5em;
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+    position: relative;
+    opacity: 0.65;
+    box-shadow: inset 0 0.2em 0 rgba(183, 0, 255), inset 0 0.4em 0 hsla(0, 0%, 100%, 0.6);
+    transform-origin: 50% 50%;
+    animation: squash2 10s ease-in-out infinite;
+}
+
+.datouwang2 .body2 .base2 {
+    position: absolute;
+    width: 3em;
+    height: 1.5em;
+    background: rgba(183, 0, 255);
+    bottom: -1.5em;
+    border-bottom-left-radius: 50% 100%;
+    border-bottom-right-radius: 50% 100%;
+    box-shadow: 3.5em 0 0 rgba(183, 0, 255), 7em 0 0 rgba(183, 0, 255);
+}
+
+.datouwang2 .body2 .base2:after {
+    content: '';
+    position: absolute;
+    width: 3em;
+    height: 1em;
+    left: 1.75em;
+    top: -0.25em;
+    background: radial-gradient(circle at 50% 120%, rgba(0, 255, 255, 0) 0, rgba(0, 255, 255, 0) 25%, rgba(183, 0, 255) 10%, rgba(183, 0, 255) 100%);
+}
+
+.datouwang2 .body2 .base2:before {
+    content: '';
+    position: absolute;
+    width: 3em;
+    height: 1em;
+    left: 5.25em;
+    top: -0.25em;
+    background: radial-gradient(circle at 50% 120%, rgba(0, 255, 255, 0) 0, rgba(0, 255, 255, 0) 25%, rgba(183, 0, 255) 10%, rgba(183, 0, 255) 100%);
+}
+
+@keyframes eyes2 {
+    40% {
+        transform: translateY(-0.2em);
+    }
+
+    60% {
+        transform: translateY(0.2em);
+    }
+}
+
+.datouwang2 .eyes2 .eye2 {
+    width: 2em;
+    height: 2em;
+    background: white;
+    position: absolute;
+    left: 2.85em;
+    top: 3em;
+    border-radius: 50%;
+    overflow: hidden;
+    transform: translateZ(0);
+}
+
+.datouwang2 .eyes2 .eye2:before {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    background: darkblue;
+    border-radius: 50%;
+    left: 15%;
+    top: 15%;
+    animation: eyes2 10s ease-in-out infinite;
+}
+
+.datouwang2 .eyes2 .eye2:after {
+    content: '';
+    position: absolute;
+    width: 25%;
+    height: 25%;
+    background: #fff;
+    border-radius: 50%;
+    left: 25%;
+    top: 25%;
+    box-shadow: 0.4em 0.4em 0 -0.12em white, 0.5em 0.05em 0 -0.15em white;
+    animation: eyes2 10s ease-in-out infinite;
+    z-index: 1;
+}
+
+.datouwang2 .eyes2 .eye2.right2 {
+    left: 5.15em;
+}
+
+.datouwang2 .eyes2 .eyelid2 {
+    width: 100%;
+    height: 100%;
+    background: rgba(183, 0, 255);
+    z-index: 2;
+    position: relative;
+    transform: translateY(-3em);
+    animation: blink2 6s ease-in-out infinite;
+}
+
+@keyframes blink2 {
+    97% {
+        transform: translateY(-3em);
+    }
+
+    100% {
+        transform: translateY(0em);
+    }
+}

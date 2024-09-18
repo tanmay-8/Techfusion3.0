@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 export function RegistrationForm() {
   return (
     (<div
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-900 to-slate-900 p-4">
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-900 to-slate-900 ">
       <Card
         className="w-full max-w-4xl bg-cyan-900/30 backdrop-blur-md border-cyan-700">
         <CardHeader>
