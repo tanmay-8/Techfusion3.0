@@ -18,7 +18,7 @@ const App = () => {
     const scroll = typeof window !== "undefined" && new LocomotiveScroll({});
     return (
         <div className=" relative  font-main overflow-x-hidden overflow-hidden ">
-            <Bubbles />
+            <Bubbles count={20} />
             <JellyFish1 />
             <JellyFish2 />
             <Hero />

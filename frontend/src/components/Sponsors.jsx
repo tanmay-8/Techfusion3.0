@@ -6,8 +6,6 @@ import Image from "next/image";
 const Sponsors = () => {
     const sponsors = [
         { src: Sponsor1, alt: "Sponsor 1" },
-        { src: Sponsor1, alt: "Sponsor 2" },
-        { src: Sponsor1, alt: "Sponsor 3" },
     ];
 
     const sponsorsRef = useRef(null);

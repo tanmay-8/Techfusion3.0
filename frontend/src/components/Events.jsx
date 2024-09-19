@@ -12,24 +12,28 @@ const Events = () => {
             title: "CloudVerse",
             description:
                 "CloudVerse is a one-day event on AWS, offering practical cloud computing insights and skills for real-world use.",
+            id:"cloudverse"
         },
         {
             image: CodeDuetImg,
             title: "CodeDuet",
             description:
                 "CodeDuet is a pair coding contest that tests teamwork and coding skills through challenging, time-bound problem-solving rounds.",
+            id:"codeduet"
         },
         {
             image: CodeCrushImg,
             title: "CodeCrush",
             description:
                 "CodeCrush is an online coding contest with Novice and Expert tracks, featuring questions from easy to hard for students to showcase and improve their skills.",
+            id:"codecrush"
         },
         {
             image: BidToBuildImg,
             title: "BidToBuild",
             description:
                 "Bid 2 Build is an IPL-style auction event where participants build their cricket team through strategic bidding. It tests cricket knowledge and decision-making skills in an exciting format.",
+            id:"bidtobuild"
         },
     ];
     return (

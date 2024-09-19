@@ -33,11 +33,17 @@ const Footer = () => {
     }, []);
 
     const socialLinks = [
-        { icon: <Facebook size={20} />, href: "#", label: "Facebook" },
         { icon: <Twitter size={20} />, href: "#", label: "Twitter" },
-        { icon: <Instagram size={20} />, href: "#", label: "Instagram" },
-        { icon: <Linkedin size={20} />, href: "#", label: "LinkedIn" },
-        { icon: <Github size={20} />, href: "#", label: "GitHub" },
+        {
+            icon: <Instagram size={20} />,
+            href: "https://www.instagram.com/wce_sait/?hl=en",
+            label: "Instagram",
+        },
+        {
+            icon: <Linkedin size={20} />,
+            href: "https://www.linkedin.com/in/wcesait/",
+            label: "LinkedIn",
+        },
     ];
 
     const footerLinks = [
@@ -53,7 +59,7 @@ const Footer = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : 50 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="bg-[#1a3c5b]/30 shadow-lg shadow-[#132e47]/50 backdrop-blur-xl border-none rounded-2xl text-gray-300 py-12 mt-32 font-body m-4 overflow-hidden z-50 mb-40" 
+            className="bg-[#1a3c5b]/30 shadow-lg shadow-[#132e47]/50 backdrop-blur-xl border-none rounded-2xl text-gray-300 py-12 mt-32 font-body m-4 overflow-hidden z-50 mb-40"
         >
             <div className="container overflow-hidden mx-auto px-4">
                 <div className="flex flex-col md:flex-row gap-16 items-center md:items-start text-center md:text-left md:justify-between overflow-hidden">
@@ -136,6 +142,7 @@ const Footer = () => {
                         </h3>
                         <form className="flex flex-col sm:flex-row">
                             <input
+                                id="contactFormEmail"
                                 type="email"
                                 placeholder="Enter your email"
                                 className="bg-gray-800 text-white px-4 py-2 rounded-md md:rounded-r-none rounded-l-md focus:outline-none focus:ring-2 focus:ring-cyan-700 mb-2 sm:mb-0"
@@ -146,6 +153,15 @@ const Footer = () => {
                                 whileTap={{ scale: 0.95 }}
                                 className="bg-cyan-700 text-white px-4 py-2 rounded-md md:rounded-l-md rounded-r-md hover:bg-cyan-600 transition-colors duration-300 "
                                 type="submit"
+                                onClick={() => {
+                                    const email =
+                                        document.getElementById(
+                                            "contactFormEmail"
+                                        ).value;
+                                    window.open(
+                                        `mailto:wce.sait@walchandsangli.ac.in?subject=Query&body=Email: ${email}`
+                                    );
+                                }}
                             >
                                 Send
                             </motion.button>

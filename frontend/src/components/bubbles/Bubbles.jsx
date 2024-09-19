@@ -18,7 +18,7 @@ const Bubble = ({ position, size, duration, onAnimationEnd }) => {
     );
 };
 
-const Bubbles = () => {
+const Bubbles = ({count}) => {
     const [bubbles, setBubbles] = useState([]);
 
     const generateBubble = useCallback(() => {
@@ -27,7 +27,7 @@ const Bubbles = () => {
         const size = Math.floor(Math.random() * 30) + 20; // 20-50px
         const duration = Math.floor(Math.random() * 10) + 5; // 5-15s
 
-        if (bubbles.length >= 20) {
+        if (bubbles.length >= count) {
             return;
         }
         return {
@@ -54,7 +54,7 @@ const Bubbles = () => {
 
     useEffect(() => {
         // Initial bubbles
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < count; i++) {
             addBubble();
         }
     }, [addBubble]);
