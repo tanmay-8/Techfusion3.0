@@ -7,12 +7,15 @@ import { ChevronDown, ChevronUp, Calendar, Users } from "lucide-react";
 import Bubbles from "@/components/bubbles/Bubbles";
 import { useRouter } from "next/navigation";
 
-const EventPage = ({ params }) => {
+export default function Component({ params }) {
     const id = params.eventId;
     const [isVisible, setIsVisible] = useState(false);
-    const [expandedSections, setExpandedSections] = useState({});
+    const [expandedSections, setExpandedSections] = useState({
+        contents: true,
+    });
     const contentRef = useRef(null);
     const router = useRouter();
+
     const eventData = {
         cloudverse: {
             title: "CloudVerse",
@@ -31,11 +34,17 @@ const EventPage = ({ params }) => {
                 "https://sait-techfusion-2-0.vercel.app/assets/image%205-7d9fa071.svg",
                 "https://sait-techfusion-2-0.vercel.app/assets/image%206-f8cf2f30.svg",
             ],
+            date: "6th October 2024",
             timing: {
-                conceptual: "29 October (9:30 AM - 12:30 PM)",
-                handsOn: "29 October (1:30 PM - 5:00 PM)",
+                "Basics Of Cloud Computing": "9:00 AM - 01:00 PM",
+                "AWS Services": "02:00 PM - 05:00 PM",
             },
-            contact: ["Kalash Patil", "Kedarnath Chavan"],
+            contact: [
+                {
+                    Name: "Aditya Aparadh",
+                    Contact: "8208056203",
+                },
+            ],
         },
         codeduet: {
             title: "Code Duet",
@@ -49,8 +58,8 @@ const EventPage = ({ params }) => {
                 "4. Each team can use their own laptop or will be provided with one PC for a level playing field.",
                 "5. Any team caught engaging in malpractice will be disqualified immediately.",
                 "*Round 2*",
-                "1. Round 2 is a classical coding round on CodeStudio.",
-                "2. This round will consist of coding questions whose difficulty level varies from easy to hard.",
+                "1. Round 2 is a pattern coding round.",
+                "2. This round will be held on HackerEarth .",
                 "3. All programming languages are supported.",
                 "4. Each team can use their laptop or be provided with one PC for a level playing field.",
                 "5. Malpractice will result in disqualification immediately.",
@@ -65,11 +74,18 @@ const EventPage = ({ params }) => {
                 "https://sait-techfusion-2-0.vercel.app/assets/image%203-aae2413c.svg",
                 "https://res.cloudinary.com/drdt2romn/image/upload/fl_preserve_transparency/v1726727187/istockphoto-1180078592-612x612-removebg-preview_iwshfg.jpg",
             ],
+            date: "5th October 2024",
             timing: {
-                conceptual: "24 October",
-                handsOn: "24 October",
+                "Round 1": "11 AM - 12 PM",
+                "Round 2": "01 PM - 01:30 PM",
+                "Round 3": "02:30 PM - 05:30 PM",
             },
-            contact: ["Aditya Tolgekar", "Vishwas Nalawade"],
+            contact: [
+                {
+                    Name: "Mahemud Borgave",
+                    Contact: "7775841645",
+                },
+            ],
         },
         codecrush: {
             title: "CodeCrush",
@@ -88,13 +104,19 @@ const EventPage = ({ params }) => {
                 "https://sait-techfusion-2-0.vercel.app/assets/image%207-8d9fa071.svg",
                 "https://sait-techfusion-2-0.vercel.app/assets/image%208-f8cf2f30.svg",
             ],
+            date: "6th October 2024",
             timing: {
-                conceptual: "27 October",
-                handsOn: "27 October",
+                "Novice Track": "09:00 PM - 11:00 PM",
+                "Expert Track": "09:00 PM - 11:00 PM",
             },
-            contact: ["Aditya Tolgekar", "Khushi Nikam"],
+            contact: [
+                {
+                    Name: "Mahemud Borgave",
+                    Contact: "7775841645",
+                },
+            ],
         },
-        bid2build: {
+        bidtobuild: {
             title: "Bid 2 Build",
             description:
                 "Bid 2 Build is an IPL-style auction event where participants build their cricket team through strategic bidding, testing cricket knowledge and decision-making skills.",
@@ -115,11 +137,18 @@ const EventPage = ({ params }) => {
                 "https://sait-techfusion-2-0.vercel.app/assets/image%209-f8cf2f30.svg",
                 "https://sait-techfusion-2-0.vercel.app/assets/image%2010-8d9fa071.svg",
             ],
+            date: "5th October 2024",
             timing: {
-                conceptual: "24 October",
-                handsOn: "24 October",
+                "Round 1": "09:00 AM - 10:00 AM",
+                "Round 2": "10:30 AM - 11:30 AM",
+                "Round 3": "12:00 PM - 02:00 PM",
             },
-            contact: ["Aaryash Devane", "Atharv Khot"],
+            contact: [
+                {
+                    Name: "Atharv Khot",
+                    Contact: "8411026001",
+                },
+            ],
         },
     };
 
@@ -153,6 +182,7 @@ const EventPage = ({ params }) => {
             [section]: !prev[section],
         }));
     };
+    
 
     return (
         <div className="min-h-screen w-full px-4 md:px-8 py-24 space-y-8 font-body flex flex-col justify-center items-center bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
@@ -242,30 +272,7 @@ const EventPage = ({ params }) => {
                             </AnimatePresence>
                         </motion.div>
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.6 }}
-                            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
-                        >
-                            {event.images.map((image, index) => (
-                                <motion.div
-                                    key={index}
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="relative h-64 md:h-80 rounded-2xl overflow-hidden shadow-lg"
-                                >
-                                    <Image
-                                        src={image}
-                                        alt={`Event image ${index + 1}`}
-                                        layout="fill"
-                                        objectFit="cover"
-                                        className="transition-transform duration-300 hover:scale-110"
-                                    />
-                                </motion.div>
-                            ))}
-                        </motion.div>
-
+                       
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
@@ -276,14 +283,18 @@ const EventPage = ({ params }) => {
                                 <h3 className="text-2xl font-semibold text-cyan-300 mb-4 flex items-center">
                                     <Calendar className="mr-2" /> Timing
                                 </h3>
-                                <p className="text-gray-300 text-lg">
-                                    Conceptual Learning:{" "}
-                                    {event.timing.conceptual}
-                                </p>
-                                {event.timing.handsOn && (
-                                    <p className="text-gray-300 text-lg mt-2">
-                                        Hands-On: {event.timing.handsOn}
-                                    </p>
+                                {Object.entries(event.timing).map(
+                                    ([key, value], index) => (
+                                        <p
+                                            key={index}
+                                            className="text-gray-300 text-lg mt-2"
+                                        >
+                                            <span className=" font-bold">
+                                                {key} : {" "}
+                                            </span>
+                                            {value}
+                                        </p>
+                                    )
                                 )}
                             </motion.div>
 
@@ -301,7 +312,7 @@ const EventPage = ({ params }) => {
                                         key={index}
                                         className="text-gray-300 text-lg"
                                     >
-                                        {contact}
+                                        {contact.Name}: {contact.Contact}
                                     </p>
                                 ))}
                             </motion.div>
@@ -312,7 +323,7 @@ const EventPage = ({ params }) => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1.2 }}
-                                className="bg-cyan-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg hover:shadow-xl mx-auto  duration-300 transform hover:-translate-y-0.5 hover:scale-105 transition-all"
+                                className="bg-cyan-500 text-white font-semibold py-2 px-6 rounded-lg shadow-lg hover:shadow-xl mx-auto duration-300 transform hover:-translate-y-0.5 hover:scale-105 transition-all"
                                 onClick={() => {
                                     router.push("/rulebook.pdf");
                                 }}
@@ -325,6 +336,4 @@ const EventPage = ({ params }) => {
             </motion.div>
         </div>
     );
-};
-
-export default EventPage;
+}

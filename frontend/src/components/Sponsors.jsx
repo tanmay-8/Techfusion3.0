@@ -35,7 +35,7 @@ const Sponsors = () => {
 
     return (
         <div className="pt-28 pb-12">
-            <h1 className="text-2xl md:text-4xl font-bold text-center text-white font-title">
+            <h1 className="text-2xl md:text-4xl font-bold text-center text-white font-title my-6">
                 Our Sponsors
             </h1>
             <div 
@@ -47,14 +47,15 @@ const Sponsors = () => {
                 {sponsors.map((sponsor, index) => (
                     <div
                         key={index}
-                        className="w-40 h-40 md:w-48 md:h-48 rounded-lg  flex items-center justify-center p-4"
+                        className="w-40 h-40 md:w-48 md:h-48 rounded-lg  flex items-center justify-center "
 
                     >
                         <Image
                             src={sponsor.src}
                             alt={sponsor.alt}
-                            width={100}
-                            height={100}
+                            width={200}
+                            height={200}
+                            className="rounded-lg"
                         />
                     </div>
                 ))}

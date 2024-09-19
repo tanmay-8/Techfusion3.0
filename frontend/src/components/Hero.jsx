@@ -1,66 +1,134 @@
+"use client";
+
 import React, { useRef, useEffect, useState } from "react";
-import Timer from "./ui/Timer";
-import ShinyButton from "./ui/ShinyButton";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const Hero = () => {
-    const heroRef = useRef(null);
-    const [isVisible, setIsVisible] = useState(true);
+    const controls = useAnimation();
+    const [ref, inView] = useInView({
+        threshold: 0.3,
+        triggerOnce: true,
+    });
 
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                // Check if the midpoint of the component is in view
-                setIsVisible(entry.intersectionRatio > 0.6);
-            },
-            {
-                root: null, // relative to the viewport
-                threshold: [0.6], // trigger when 50% of the component is in view
-            }
-        );
-
-        if (heroRef.current) {
-            observer.observe(heroRef.current);
+        if (inView) {
+            controls.start("visible");
         }
-
-        return () => {
-            if (heroRef.current) {
-                observer.unobserve(heroRef.current);
-            }
-        };
-    }, []);
+    }, [controls, inView]);
 
     return (
         <motion.div
-            id="home"
-            ref={heroRef}
-            data-scroll
-            data-scroll-section
-            data-scroll-speed="-.2"
-            className="h-screen flex flex-col items-center justify-center space-y-16 "
-            initial={{ opacity: 0, y: -100, scale: 0.9 }}
-            animate={{
-                opacity: isVisible ? 1 : 0,
-                y: isVisible ? 0 : -100,
-                scale: isVisible ? 1 : 0.9,
+            ref={ref}
+            initial="hidden"
+            animate={controls}
+            variants={{
+                visible: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 50 },
             }}
-            transition={{
-                duration: 0.8, // smoother and slightly faster
-                ease: "easeInOut", // easing for smooth in-out effect
-            }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden font-title"
         >
-            <div>
-                <h1 className="text-4xl md:text-8xl text-center text-white font-extrabold font-title mb-1">
-                    Techfusion 3.0
+            <motion.div
+                className="text-center z-10 px-4 sm:px-6 lg:px-8"
+                variants={{
+                    visible: { opacity: 1, y: 0 },
+                    hidden: { opacity: 0, y: 20 },
+                }}
+            >
+                <h1 className="text-5xl sm:text-7xl md:text-8xl font-extrabold text-white mb-4">
+                    Techfusion 2K24
                 </h1>
-                <h2 className="text-lg md:text-2xl text-center text-white font-medium font-title">
+                <h2 className="text-xl sm:text-2xl md:text-3xl text-blue-100 font-light mb-8">
                     Students' Association of Information Technology WCE, Sangli
                 </h2>
-            </div>
-            <Timer />
-            <ShinyButton />
+                <Timer />
+                <ShinyButton />
+            </motion.div>
         </motion.div>
     );
 };
+
+const Timer = () => {
+    const [time, setTime] = useState({
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+    });
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const now = new Date();
+            const target = new Date(now.getFullYear(), 9, 5); // First day of next month
+            const difference = target.getTime() - now.getTime();
+
+            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((difference / (1000 * 60 * 60)) % 24);
+            const m = Math.floor((difference / 1000 / 60) % 60);
+            const s = Math.floor((difference / 1000) % 60);
+
+            setTime({ days: d, hours: h, minutes: m, seconds: s });
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <div className="flex justify-center space-x-4 mb-8">
+            {Object.entries(time).map(([key, value]) => (
+                <div key={key} className="flex flex-col items-center">
+                    <div className="text-4xl sm:text-5xl font-bold text-white bg-blue-600 bg-opacity-50 rounded-lg p-3 backdrop-blur-sm">
+                        {value.toString().padStart(2, "0")}
+                    </div>
+                    <div className="text-blue-100 text-sm mt-2 capitalize">
+                        {key}
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};
+
+const ShinyButton = () => {
+    return (
+        <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-full overflow-hidden transition-all duration-300 ease-in-out transform hover:shadow-xl hover:shadow-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 mt-4"
+            onClick={() => {
+                document
+                    .getElementById("registerForm")
+                    .scrollIntoView({ behavior: "smooth" });
+            }}
+        >
+            <motion.span
+                className="relative z-10"
+                initial={{ y: 0 }}
+                whileHover={{ y: -2 }}
+            >
+                Register Now
+            </motion.span>
+            <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600"
+                initial={{ x: "100%", opacity: 0 }}
+                whileHover={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+            />
+            <motion.div
+                className="absolute inset-0 bg-blue-400 rounded-full"
+                initial={{ scale: 0, opacity: 0 }}
+                whileHover={{ scale: 1.5, opacity: 0.4 }}
+                transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                }}
+            />
+        </motion.button>
+    );
+};
+
+
 
 export default Hero;

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import QrImg from "@/assets/qr.jpeg";
 import {
     Select,
     SelectContent,
@@ -121,9 +122,9 @@ export default function Register() {
     useEffect(() => {
         const prices = {
             codeduet: 150,
-            codecrush: 60,
-            cloudverse: 100,
-            bidtobuild: 80,
+            codecrush: 50,
+            cloudverse: 150,
+            bidtobuild: 200,
         };
         const amount = Object.entries(selectedEvents)
             .filter(([, isSelected]) => isSelected)
@@ -378,6 +379,8 @@ export default function Register() {
                                                 "Second Year",
                                                 "Third Year",
                                                 "Fourth Year",
+                                                "Diploma First Year",
+                                                "Diploma Second Year",
                                             ].map((year, index) => (
                                                 <SelectItem
                                                     key={index + 1}
@@ -418,17 +421,17 @@ export default function Register() {
                                     {
                                         id: "codecrush",
                                         name: "CodeCrush",
-                                        price: 60,
+                                        price: 50,
                                     },
                                     {
                                         id: "cloudverse",
                                         name: "CloudVerse",
-                                        price: 100,
+                                        price: 150,
                                     },
                                     {
                                         id: "bidtobuild",
                                         name: "Bid to Build",
-                                        price: 80,
+                                        price: 200,
                                     },
                                 ].map((event) => (
                                     <div
@@ -487,7 +490,7 @@ export default function Register() {
                             </div>
                             <div className="flex justify-center items-center">
                                 <Image
-                                    src="/placeholder.svg?height=200&width=200"
+                                    src={QrImg}
                                     alt="QR Code for payment"
                                     width={200}
                                     height={200}

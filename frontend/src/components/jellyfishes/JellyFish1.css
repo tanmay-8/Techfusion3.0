@@ -4,7 +4,7 @@
     }
 
     100% {
-        transform: translateY(-1000px) translateX(100vw);
+        transform: translateY(-500px) translateX(100vw);
     }
 }
 
@@ -33,12 +33,12 @@
     position: absolute;
     filter: drop-shadow(0 0 1em rgb(0, 145, 255));
     height: 14em;
-    animation: swim 60s ease-in-out infinite;
+    animation: swim 45s ease-in-out infinite;
     transform-origin: 50% 0;
     transform: translateY(3em);
     margin: 10px auto;
     width: 200px;
-    top: 20%;
+    top: 10%;
     left: 10%;
     z-index: 10;
 }

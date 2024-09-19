@@ -44,7 +44,7 @@ const About = () => {
             }}
             className="py-20 w-full flex justify-center items-center text-center text-white px-5 md:px-20 z-5"
         >
-            <div className="bg-[#1a3c5b]/40 shadow-lg shadow-[#132e47] backdrop-blur-lg border border-[#2a5075] rounded-2xl p-6 z-10">
+            <div className="bg-[#308de4]/40 shadow-lg shadow-[#132e47] backdrop-blur-lg border border-[#308de4] rounded-2xl p-6 z-10">
                 <h2 className="text-3xl font-bold font-title">
                     Welcome to Techfusion 3.0!
                 </h2>

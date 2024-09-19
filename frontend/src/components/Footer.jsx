@@ -1,7 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Linkedin, Github } from "lucide-react";
+import {
+    Facebook,
+    Twitter,
+    Instagram,
+    Linkedin,
+    Github,
+    Youtube,
+} from "lucide-react";
 import Logo from "@/assets/sait.png";
 import Image from "next/image";
 import BottomImg from "@/assets/bottom.png";
@@ -33,7 +40,11 @@ const Footer = () => {
     }, []);
 
     const socialLinks = [
-        { icon: <Twitter size={20} />, href: "#", label: "Twitter" },
+        {
+            icon: <Youtube size={20} />,
+            href: "https://www.youtube.com/channel/UC25efYQvKGZXJSmHXLUB1fA",
+            label: "Twitter",
+        },
         {
             icon: <Instagram size={20} />,
             href: "https://www.instagram.com/wce_sait/?hl=en",
