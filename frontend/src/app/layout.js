@@ -13,7 +13,7 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-    title:"Techfusion 3.0",
+    title:"Techfusion 2k24",
     description:"Increadible event brought to you by Student's asscoiation of Information Technology, Walchand College of Engineering, Sangli",
 };
 

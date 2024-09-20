@@ -40,7 +40,7 @@ const Event = ({ event, ind }) => {
             }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="flex w-[300px] md:w-[380px] min-h-[400px] flex-col overflow-hidden rounded-2xl
-             bg-[#073c60]/30   backdrop-blur-lg shadow-[#132e47] shadow-md z-10 "
+             bg-[#073c60]/30   backdrop-blur-lg shadow-[#132e47] shadow-md z-10 cursor-pointer transition-all hover:scale-105 max-h-[521px]"
         >
             <div className="relative mb-4 flex h-full w-full items-center justify-center overflow-hidden [mask:linear-gradient(black_70%,transparent)]">
                 <Image src={event.image} alt={event.title} height={400} className="max-w-w-[300px] md:max-w-[380px]" />

@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ChevronDown, ChevronUp, Calendar, Users } from "lucide-react";
+import { ChevronDown, ChevronUp, Calendar, Users, Contact, Clock, CreditCard } from "lucide-react";
 import Bubbles from "@/components/bubbles/Bubbles";
 import { useRouter } from "next/navigation";
 
@@ -27,8 +27,8 @@ export default function Component({ params }) {
                 "3. Cloud service providers & introduction to AWS",
                 "4. Service and deployment models",
                 "5. Hypervisor & Virtualization",
-                "6. IAM Roles and Management",
-                "7. AWS Services such as S3, EC2, VPC, Lambda",
+                "6. AWS Services such as S3, EC2, Lambda,IAM with Handson",
+                "7. Overview of other AWS Services",
             ],
             images: [
                 "https://sait-techfusion-2-0.vercel.app/assets/image%205-7d9fa071.svg",
@@ -44,7 +44,12 @@ export default function Component({ params }) {
                     Name: "Aditya Aparadh",
                     Contact: "8208056203",
                 },
+                {
+                    Name: "Tanmay Shingde",
+                    Contact: "7507488201",
+                },
             ],
+            fees: "₹ 150 per person",
         },
         codeduet: {
             title: "Code Duet",
@@ -53,7 +58,7 @@ export default function Component({ params }) {
             contents: [
                 "*Round 1*",
                 "1. Code Duet round 1 is a mandatory round for all teams.",
-                "2. The round will be held on HackerEarth and consist of General Aptitude MCQ Questions.",
+                "2. The round will be held on HackerEarth and consist of C/C++ MCQ Questions.",
                 "3. The difficulty level of questions will vary from easy to hard.",
                 "4. Each team can use their own laptop or will be provided with one PC for a level playing field.",
                 "5. Any team caught engaging in malpractice will be disqualified immediately.",
@@ -64,8 +69,8 @@ export default function Component({ params }) {
                 "4. Each team can use their laptop or be provided with one PC for a level playing field.",
                 "5. Malpractice will result in disqualification immediately.",
                 "*Round 3*",
-                "1. Round 3 is the final round of the competition and will be held on CodeStudio.",
-                "2. The round duration is 1 hour.",
+                "1. Round 3 is the final round of the competition and will be held on HackerEarth.",
+                "2. The round duration is 2 hour.",
                 "3. It will consist of simple input/output questions, where participants write code to satisfy the given input/output relations.",
                 "4. Teams can use their own laptops or be provided with a PC.",
                 "5. Malpractice will result in disqualification.",
@@ -85,7 +90,12 @@ export default function Component({ params }) {
                     Name: "Mahemud Borgave",
                     Contact: "7775841645",
                 },
+                {
+                    Name: "Satej Sawant",
+                    Contact: "7058519790",
+                },
             ],
+            fees: "₹ 150 per team",
         },
         codecrush: {
             title: "CodeCrush",
@@ -96,8 +106,8 @@ export default function Component({ params }) {
                 "1. Reserved for first-year degree, first-year diploma, second-year diploma students.",
                 "*Expert Track*",
                 "1. Open to students in their second, third, and final years of degree, and third-year diploma students.",
-                "2. Contest will take place on CodeStudio, where participants will have 2 hours to complete coding questions.",
-                "3. Top four performers will receive prizes, with a special recognition for the top female participant.",
+                "2. Contest will take place on HackerEarth, where participants will have 2 hours to complete coding questions.",
+                "3. Top three performers will receive prizes, with a special recognition for the top female participant.",
                 "4. The contest is entirely online and participants can join from any location.",
             ],
             images: [
@@ -115,6 +125,7 @@ export default function Component({ params }) {
                     Contact: "7775841645",
                 },
             ],
+            fees: "₹ 50 per person",
         },
         bidtobuild: {
             title: "Bid 2 Build",
@@ -149,6 +160,7 @@ export default function Component({ params }) {
                     Contact: "8411026001",
                 },
             ],
+            fees: "₹ 200 per team",
         },
     };
 
@@ -182,7 +194,6 @@ export default function Component({ params }) {
             [section]: !prev[section],
         }));
     };
-    
 
     return (
         <div className="min-h-screen w-full px-4 md:px-8 py-24 space-y-8 font-body flex flex-col justify-center items-center bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
@@ -272,7 +283,6 @@ export default function Component({ params }) {
                             </AnimatePresence>
                         </motion.div>
 
-                       
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
@@ -281,7 +291,36 @@ export default function Component({ params }) {
                                 className="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 p-6 rounded-2xl shadow-lg"
                             >
                                 <h3 className="text-2xl font-semibold text-cyan-300 mb-4 flex items-center">
-                                    <Calendar className="mr-2" /> Timing
+                                    <Calendar className="mr-2" /> Date
+                                </h3>
+                                <p className="text-gray-300 text-lg">
+                                    {event.date}
+                                </p>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 1 }}
+                                className="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 p-6 rounded-2xl shadow-lg"
+                            >
+                                <h3 className="text-2xl font-semibold text-cyan-300 mb-4 flex items-center">
+                                    <CreditCard className="mr-2" /> Fees
+                                </h3>
+                                <p className="text-gray-300 text-lg">
+                                    {event.fees}
+                                </p>
+                            </motion.div>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.8 }}
+                                className="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 p-6 rounded-2xl shadow-lg"
+                            >
+                                <h3 className="text-2xl font-semibold text-cyan-300 mb-4 flex items-center">
+                                    <Clock className="mr-2" /> Timing
                                 </h3>
                                 {Object.entries(event.timing).map(
                                     ([key, value], index) => (
@@ -290,7 +329,7 @@ export default function Component({ params }) {
                                             className="text-gray-300 text-lg mt-2"
                                         >
                                             <span className=" font-bold">
-                                                {key} : {" "}
+                                                {key} :{" "}
                                             </span>
                                             {value}
                                         </p>

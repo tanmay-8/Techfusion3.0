@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import QrImg from "@/assets/qr.jpeg";
+import QrImg2 from "@/assets/qr2.jpeg";
 import {
     Select,
     SelectContent,
@@ -488,14 +489,22 @@ export default function Register() {
                                     ₹{totalAmount}
                                 </span>
                             </div>
-                            <div className="flex justify-center items-center">
+                            <div className="w-full gap-6 md:flex justify-center items-center">
                                 <Image
                                     src={QrImg}
                                     alt="QR Code for payment"
                                     width={200}
                                     height={200}
-                                    className="bg-white p-2 rounded-lg"
+                                    className="bg-white rounded-lg mx-auto"
                                 />
+                                <Image 
+                                    src={QrImg2}
+                                    alt="QR Code for payment"
+                                    width={200}
+                                    height={200}
+                                    className="bg-white rounded-lg mx-auto mt-4 md:mt-0"
+                                />
+
                             </div>
                         </motion.div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
