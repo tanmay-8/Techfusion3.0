@@ -388,6 +388,7 @@ export default function Register() {
                                                 "Fourth Year",
                                                 "Diploma First Year",
                                                 "Diploma Second Year",
+                                                "Diploma Third Year",
                                             ].map((year, index) => (
                                                 <SelectItem
                                                     key={index + 1}
