@@ -78,7 +78,7 @@ const Timer = () => {
         <div className="flex justify-center space-x-4 mb-8">
             {Object.entries(time).map(([key, value]) => (
                 <div key={key} className="flex flex-col items-center">
-                    <div className="text-4xl sm:text-5xl font-bold text-white bg-blue-600 bg-opacity-50 rounded-lg p-3 backdrop-blur-sm">
+                    <div className="text-4xl sm:text-5xl font-bold text-white bg-[#308de4]/40 bg-opacity-50 rounded-lg p-3 backdrop-blur-sm">
                         {value.toString().padStart(2, "0")}
                     </div>
                     <div className="text-blue-100 text-sm mt-2 capitalize">
@@ -95,7 +95,7 @@ const ShinyButton = () => {
         <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="relative px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-full overflow-hidden transition-all duration-300 ease-in-out transform hover:shadow-xl hover:shadow-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 mt-4"
+            className="relative px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-[#308de4]/40 to-[#308de4]/40  rounded-full overflow-hidden transition-all duration-300 ease-in-out transform hover:shadow-lg hover:shadow-[#308de4]/30 focus:outline-none focus:ring-2 focus:ring-[#2792f6] focus:ring-opacity-50 mt-4"
             onClick={() => {
                 document
                     .getElementById("registerForm")
@@ -128,7 +128,5 @@ const ShinyButton = () => {
         </motion.button>
     );
 };
-
-
 
 export default Hero;

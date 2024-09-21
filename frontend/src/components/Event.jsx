@@ -43,8 +43,8 @@ export default function Component({ event, ind }) {
                 x: isVisible ? 0 : ind % 2 === 0 ? -100 : 100,
             }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="group flex w-[300px] md:w-[380px] min-h-[400px] flex-col overflow-hidden rounded-2xl
-       bg-[#073c60]/30 backdrop-blur-lg shadow-[#132e47] shadow-md z-10 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#132e47]/50 max-h-[521px]"
+            className="flex w-[300px] md:w-[380px] min-h-[400px] flex-col overflow-hidden rounded-2xl
+         bg-[#073c60]/30   backdrop-blur-lg shadow-[#132e47] shadow-md z-10 cursor-pointer hover:scale-105 max-h-[521px]"
             style={{
                 boxShadow:
                     "0 4px 6px -1px rgba(19, 46, 71, 0.1), 0 2px 4px -1px rgba(19, 46, 71, 0.06)",
