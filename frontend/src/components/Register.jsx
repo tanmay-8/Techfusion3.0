@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useForm, Controller, set, useWatch } from "react-hook-form";
+import { useForm, Controller, useWatch } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -90,6 +90,7 @@ export default function Register() {
             },
             transaction: "",
             screenshot: null,
+            collegeIdPhoto: null,
         },
     });
 
@@ -136,64 +137,69 @@ export default function Register() {
     const onSubmit = async (data) => {
         setIsLoading(true);
         try {
-            const formData = new FormData();
-            formData.append("transactionImage", data.screenshot);
-            const res = await fetch(imageUploadApi, {
+            // Helper function to handle image upload
+            const uploadImage = async (image) => {
+                const formData = new FormData();
+                formData.append("transactionImage", image);
+                const response = await fetch(imageUploadApi, {
+                    method: "POST",
+                    body: formData,
+                });
+                if (!response.ok) throw new Error("Image upload failed");
+                return response.json();
+            };
+
+            const [transactionImageResponse, collegeIdImageResponse] =
+                await Promise.all([
+                    uploadImage(data.screenshot),
+                    uploadImage(data.collegeIdPhoto),
+                ]);
+
+            const submitData = {
+                name: data.name,
+                email: data.email,
+                phone: data.whatsapp,
+                college: data.college,
+                year: parseInt(data.year),
+                events: Object.entries(data.events)
+                    .filter(([, isSelected]) => isSelected)
+                    .map(([event]) => {
+                        const eventMap = {
+                            codeduet: "CodeDuet",
+                            codecrush: "CodeCrush",
+                            cloudverse: "CloudVerse",
+                            bidtobuild: "Bid2Build",
+                        };
+                        return eventMap[event];
+                    }),
+                amount: totalAmount,
+                transactionLink: transactionImageResponse.transactionLink,
+                transactionID: data.transaction,
+                IDCardLink: collegeIdImageResponse.transactionLink,
+            };
+
+            const response = await fetch(formSubmitApi, {
                 method: "POST",
-                body: formData,
                 headers: {
-                    Accept: "application/json",
+                    "Content-Type": "application/json",
                 },
+                body: JSON.stringify(submitData),
             });
 
-            if (!res.ok) {
-                throw new Error("Image upload failed");
-            } else {
-                const image = await res.json();
-                let url = image.transactionLink;
-                const submitData = {
-                    name: data.name,
-                    email: data.email,
-                    phone: data.whatsapp,
-                    college: data.college,
-                    year: parseInt(data.year),
-                    events: Object.entries(data.events)
-                        .filter(([, isSelected]) => isSelected)
-                        .map(([event]) => {
-                            if (event === "codeduet") return "CodeDuet";
-                            if (event === "codecrush") return "CodeCrush";
-                            if (event === "cloudverse") return "CloudVerse";
-                            if (event === "bidtobuild") return "Bid2Build";
-                        }),
-                    amount: totalAmount,
-                    transactionLink: url,
-                    transactionID: data.transaction,
-                };
-                const response = await fetch(formSubmitApi, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(submitData),
-                });
+            if (!response.ok) throw new Error("Registration failed");
 
-                if (!response.ok) {
-                    throw new Error("Registration failed");
-                } else {
-                    setAlertState({
-                        isOpen: true,
-                        title: "Registration Successful!",
-                        message:
-                            "Thank you for registering. We'll contact you soon.",
-                        isSuccess: true,
-                    });
-                }
-            }
-        } catch (e) {
+            setAlertState({
+                isOpen: true,
+                title: "Registration Successful!",
+                message: "Thank you for registering. We'll contact you soon.",
+                isSuccess: true,
+            });
+        } catch (error) {
             setAlertState({
                 isOpen: true,
                 title: "Registration Failed",
                 message:
+                    error.message ||
                     "There was an error processing your registration. Please try again.",
                 isSuccess: false,
             });
@@ -406,6 +412,44 @@ export default function Register() {
                                 opacity: isVisible ? 1 : 0,
                                 y: isVisible ? 0 : 50,
                             }}
+                            transition={{ duration: 0.5, delay: 0.9 }}
+                            className="space-y-2"
+                        >
+                            <Label
+                                htmlFor="collegeIdPhoto"
+                                className="text-gray-200"
+                            >
+                                College ID Photo
+                            </Label>
+                            <Controller
+                                name="collegeIdPhoto"
+                                control={control}
+                                rules={{
+                                    required: "College ID photo is required",
+                                }}
+                                render={({ field }) => (
+                                    <Input
+                                        id="collegeIdPhoto"
+                                        type="file"
+                                        onChange={(e) =>
+                                            field.onChange(e.target.files[0])
+                                        }
+                                        className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200 placeholder:text-gray-400 cursor-pointer"
+                                    />
+                                )}
+                            />
+                            {errors.collegeIdPhoto && (
+                                <p className="text-red-500 text-sm">
+                                    {errors.collegeIdPhoto.message}
+                                </p>
+                            )}
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{
+                                opacity: isVisible ? 1 : 0,
+                                y: isVisible ? 0 : 50,
+                            }}
                             transition={{ duration: 0.5, delay: 0.6 }}
                             className="space-y-4"
                         >
@@ -497,14 +541,13 @@ export default function Register() {
                                     height={200}
                                     className="bg-white rounded-lg mx-auto"
                                 />
-                                <Image 
+                                <Image
                                     src={QrImg2}
                                     alt="QR Code for payment"
                                     width={200}
                                     height={200}
                                     className="bg-white rounded-lg mx-auto mt-4 md:mt-0"
                                 />
-
                             </div>
                         </motion.div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
@@ -594,7 +637,7 @@ export default function Register() {
                                 opacity: isVisible ? 1 : 0,
                                 scale: isVisible ? 1 : 0.5,
                             }}
-                            transition={{ duration: 0.5, delay: 0.9 }}
+                            transition={{ duration: 0.5, delay: 1 }}
                             className="w-full flex justify-center"
                         >
                             <Button
@@ -602,12 +645,7 @@ export default function Register() {
                                 type="submit"
                                 className="w-full sm:w-auto px-8 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold text-lg rounded-lg transition-colors duration-300"
                             >
-                                {
-                                    {
-                                        true: "Registering...",
-                                        false: "Register",
-                                    }[isLoading]
-                                }
+                                {isLoading ? "Registering..." : "Register"}
                             </Button>
                         </motion.div>
                     </div>

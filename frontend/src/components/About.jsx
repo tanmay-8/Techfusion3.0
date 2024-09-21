@@ -8,12 +8,11 @@ const About = () => {
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                
                 setIsVisible(entry.intersectionRatio > 0.3);
             },
             {
                 root: null,
-                threshold: [0.3], 
+                threshold: [0.3],
             }
         );
 
@@ -46,19 +45,26 @@ const About = () => {
         >
             <div className="bg-[#308de4]/40 shadow-lg shadow-[#132e47] backdrop-blur-lg border border-[#308de4] rounded-2xl p-6 z-10">
                 <h2 className="text-3xl font-bold font-title">
-                    Welcome to Techfusion 3.0!
+                    Welcome to Techfusion 2k24
                 </h2>
                 <p className="mt-6 text-xl font-body max-w-[900px]">
-                    Techfusion 3.0 is a celebration of technology, innovation,
-                    and creativity like never before. Hosted by SAIT, we are
-                    thrilled to bring you an electrifying event that will leave
-                    you amazed! This year's theme is the cosmos, honoring our
-                    nation's achievements in space exploration. Get ready for an
-                    intergalactic adventure with 5 incredible subevents,
-                    providing a platform for students to showcase their talents.
-                    Join us on this stellar journey where the sky is not the
-                    limit; it's just the beginning! Shoot for the moon and
-                    beyond with Techfusion 2.0!
+                    Techfusion 2k24 is a tidal wave of technology, innovation,
+                    and creativity, hosted by the Student's Association of
+                    Information Technology (SAIT), Walchand College of
+                    Engineering, Sangli. This year, we're diving into uncharted
+                    waters with our oceanic theme, symbolizing the depth and
+                    vastness of knowledge and exploration. Get ready to ride the
+                    waves of innovation as we embark on a journey beneath the
+                    surface to discover new horizons in technology.<br></br>
+                    With 4 extraordinary sub-events, Techfusion 2k24 offers a
+                    platform for students to plunge into creativity and immerse
+                    themselves in challenges that will push them to the very
+                    depths of their potential. Dive deep into a sea of
+                    possibilities, where every ripple of innovation creates
+                    waves of impact.<br></br>
+                    Join us as we sail through unbounded opportunities—because
+                    in Techfusion 2k24, the ocean of knowledge is limitless, and
+                    we're charting a course for greatness!<br></br>
                 </p>
             </div>
         </motion.div>

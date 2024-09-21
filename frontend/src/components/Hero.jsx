@@ -27,7 +27,7 @@ const Hero = () => {
                 hidden: { opacity: 0, y: 50 },
             }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden font-title"
+            className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden font-title mt-6"
         >
             <motion.div
                 className="text-center z-10 px-4 sm:px-6 lg:px-8"

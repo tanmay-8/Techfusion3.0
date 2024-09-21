@@ -3,6 +3,7 @@ import Logo from "@/assets/sait.png";
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
+import { Button } from "./ui/button";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,74 +24,20 @@ export default function Header() {
                             <Image src={Logo} width={60}></Image>
                         </Link>
                     </div>
-                    <nav className="hidden md:flex space-x-6">
-                        <Link
-                            href="/"
-                            className="hover:scale-105 transition-all"
-                        >
-                            Home
-                        </Link>
-                        <Link
-                            href="/about"
-                            className="hover:scale-105 transition-all"
-                        >
-                            About
-                        </Link>
-                        <Link
-                            href="/events"
-                            className="hover:scale-105 transition-all"
-                        >
-                            Events
-                        </Link>
-                    </nav>
-                    <div className="hidden md:flex items-center space-x-4">
-                        <Link
-                            href="/register"
+                    <div className="flex items-center space-x-4">
+                        <button
+                            onClick={() => {
+                                document
+                                    .getElementById("registerForm")
+                                    .scrollIntoView({ behavior: "smooth" });
+                            }}
                             className="border-cyan-800 hover:scale-105 transition-all border rounded-full text-white px-8 py-2 "
                         >
                             Register
-                        </Link>
-                    </div>
-                    <div className="md:hidden">
-                        <button
-                            onClick={toggleMenu}
-                            className="text-gray-100 hover:scale-105 focus:outline-none mr-8"
-                        >
-                            <Menu className="h-6 w-6" />
                         </button>
                     </div>
                 </div>
             </div>
-            {isMenuOpen && (
-                <div className="md:hidden ">
-                    <div className="flex flex-col items-center justify-center mx-auto px-4 py-2 space-y-6">
-                        <Link
-                            href="/"
-                            className="block hover:scale-105 transition-all"
-                        >
-                            Home
-                        </Link>
-                        <Link
-                            href="/about"
-                            className="block hover:scale-105 transition-all"
-                        >
-                            About
-                        </Link>
-                        <Link
-                            href="/events"
-                            className="block hover:scale-105 transition-all"
-                        >
-                            Events
-                        </Link>
-                        <Link
-                            href="/register"
-                            className="border-cyan-800 hover:scale-105 transition-all border rounded-full text-white px-8 py-2 bg-black mt-6"
-                        >
-                            Register
-                        </Link>
-                    </div>
-                </div>
-            )}
         </header>
     );
 }

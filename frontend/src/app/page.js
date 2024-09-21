@@ -21,6 +21,7 @@ const App = () => {
             <Bubbles count={20} />
             <JellyFish1 />
             <JellyFish2 />
+            <Header />
             <Hero />
             <About />
             <Events />
