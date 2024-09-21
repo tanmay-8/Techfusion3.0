@@ -13,6 +13,7 @@ import JellyFish1 from "@/components/jellyfishes/JellyFish1";
 import JellyFish2 from "@/components/jellyfishes/JellyFish2";
 import Image from "next/image";
 import BottomImg from "@/assets/bottom.png";
+import Submarine from "@/components/submarine/Submarine";
 
 const App = () => {
     const scroll = typeof window !== "undefined" && new LocomotiveScroll({});

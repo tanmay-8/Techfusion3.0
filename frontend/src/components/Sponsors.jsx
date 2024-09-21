@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import Sponsor1 from "../assets/sponsor1.png";
+import Sponsor2 from "../assets/sponsor2.jpeg";
+import Sponsor3 from "../assets/sponsor3.png";
 import { motion, useAnimation } from "framer-motion";
 import Image from "next/image";
 
 const Sponsors = () => {
     const sponsors = [
         { src: Sponsor1, alt: "Sponsor 1" },
+        { src: Sponsor2, alt: "Sponsor 2" },
+        { src: Sponsor3, alt: "Sponsor 3" },
     ];
 
     const sponsorsRef = useRef(null);
@@ -38,26 +42,35 @@ const Sponsors = () => {
             <h1 className="text-2xl md:text-4xl font-bold text-center text-white font-title my-6">
                 Our Sponsors
             </h1>
-            <div 
+            <div
                 ref={sponsorsRef}
                 initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: isVisible ? 1 : 0, opacity: isVisible ? 1 : 0 }}
+                animate={{
+                    scale: isVisible ? 1 : 0,
+                    opacity: isVisible ? 1 : 0,
+                }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="flex  justify-center items-center gap-8 md:gap-12">
+                className="flex  justify-center items-center gap-8 md:gap-12"
+            >
                 {sponsors.map((sponsor, index) => (
-                    <div
+                    <motion.div
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{
+                            scale: isVisible ? 1 : 0,
+                            opacity: isVisible ? 1 : 0,
+                        }}
+                        transition={{ duration: 0.8, ease: "easeInOut" }}
                         key={index}
-                        className="w-40 h-40 md:w-48 md:h-48 rounded-lg  flex items-center justify-center "
-
+                        className="rounded-lg  flex items-center justify-center "
                     >
                         <Image
                             src={sponsor.src}
                             alt={sponsor.alt}
-                            width={200}
-                            height={200}
+                            width={index != 0 ? 130 : 150}
+                            height={index != 0 ? 130 : 150}
                             className="rounded-lg"
                         />
-                    </div>
+                    </motion.div>
                 ))}
             </div>
         </div>
