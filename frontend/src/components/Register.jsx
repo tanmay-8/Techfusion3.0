@@ -127,10 +127,10 @@ export default function Register() {
 
     useEffect(() => {
         const prices = {
-            codeduet: 150,
-            codecrush: 50,
-            cloudverse: 150,
-            bidtobuild: 200,
+            codeduet: 149,
+            codecrush: 49,
+            cloudverse: 149,
+            bidtobuild: 199,
         };
         const amount = Object.entries(selectedEvents)
             .filter(([, isSelected]) => isSelected)
@@ -471,22 +471,22 @@ export default function Register() {
                                     {
                                         id: "codeduet",
                                         name: "CodeDuet",
-                                        price: 150,
+                                        price: 149,
                                     },
                                     {
                                         id: "codecrush",
                                         name: "CodeCrush",
-                                        price: 50,
+                                        price: 49,
                                     },
                                     {
                                         id: "cloudverse",
                                         name: "CloudVerse",
-                                        price: 150,
+                                        price: 149,
                                     },
                                     {
                                         id: "bidtobuild",
                                         name: "Bid to Build",
-                                        price: 200,
+                                        price: 199,
                                     },
                                 ].map((event) => (
                                     <div
