@@ -15,7 +15,7 @@ export default function Header() {
     return (
         <header className=" text-gray-100 py-3 fixed top-0 z-20 backdrop-blur-md mx-auto w-[98%]">
             <div className="container mx-auto px-4">
-                <div className="flex items-center justify-between py-4">
+                <div className="flex items-center justify-between ">
                     <div className="flex items-center">
                         <Link
                             href="/"
