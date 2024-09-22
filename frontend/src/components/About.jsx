@@ -45,11 +45,11 @@ const About = () => {
             className="py-20 w-full flex justify-center items-center text-left text-white px-5 md:px-20 z-5"
         >
             <div className="bg-[#308de4]/40 shadow-lg shadow-[#132e47] backdrop-blur-lg border border-[#308de4] rounded-2xl p-6 z-10">
-                <Image src={TechfusionLogo} alt="About" width={250} height={250} className="mx-auto rounded-full mb-6" />
-                <h2 className="text-3xl font-bold font-title text-center">
+                <Image src={TechfusionLogo} alt="About" width={150} height={150} className="mx-auto rounded-full mb-6" />
+                <h2 className="text-2xl font-bold font-title text-center">
                     Welcome to Techfusion 2k24
                 </h2>
-                <p className="mt-4 text-xl font-body text-center max-w-[900px]">
+                <p className="mt-4 font-body text-center max-w-[900px]">
                     Techfusion 2k24, hosted by the Student's Association of
                     Information Technology (SAIT), Walchand College of
                     Engineering, Sangli, is a wave of technology, innovation,
