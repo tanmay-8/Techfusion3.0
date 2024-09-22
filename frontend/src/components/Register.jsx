@@ -259,7 +259,7 @@ export default function Register() {
                                     id: "name",
                                     label: "Name",
                                     placeholder:
-                                        "Enter name of all team members",
+                                        "Enter your name",
                                     validation: {
                                         required: "Name is required",
                                     },
