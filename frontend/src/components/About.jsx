@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
-
+import TechfusionLogo from "../assets/techfusion.png";
+import Image from "next/image";
 const About = () => {
     const aboutRef = useRef(null);
     const [isVisible, setIsVisible] = useState(true);
@@ -44,27 +45,23 @@ const About = () => {
             className="py-20 w-full flex justify-center items-center text-left text-white px-5 md:px-20 z-5"
         >
             <div className="bg-[#308de4]/40 shadow-lg shadow-[#132e47] backdrop-blur-lg border border-[#308de4] rounded-2xl p-6 z-10">
+                <Image src={TechfusionLogo} alt="About" width={250} height={250} className="mx-auto rounded-full mb-6" />
                 <h2 className="text-3xl font-bold font-title text-center">
                     Welcome to Techfusion 2k24
                 </h2>
-                <p className="mt-6 text-xl font-body text-center max-w-[900px]">
-                    Techfusion 2k24 is a tidal wave of technology, innovation,
-                    and creativity, hosted by the Student's Association of
+                <p className="mt-4 text-xl font-body text-center max-w-[900px]">
+                    Techfusion 2k24, hosted by the Student's Association of
                     Information Technology (SAIT), Walchand College of
-                    Engineering, Sangli. This year, we're diving into uncharted
-                    waters with our oceanic theme, symbolizing the depth and
-                    vastness of knowledge and exploration. Get ready to ride the
-                    waves of innovation as we embark on a journey beneath the
-                    surface to discover new horizons in technology.<br></br>
-                    With 4 extraordinary sub-events, Techfusion 2k24 offers a
-                    platform for students to plunge into creativity and immerse
-                    themselves in challenges that will push them to the very
-                    depths of their potential. Dive deep into a sea of
-                    possibilities, where every ripple of innovation creates
-                    waves of impact.<br></br>
-                    Join us as we sail through unbounded opportunities—because
-                    in Techfusion 2k24, the ocean of knowledge is limitless, and
-                    we're charting a course for greatness!<br></br>
+                    Engineering, Sangli, is a wave of technology, innovation,
+                    and creativity. This year's oceanic theme reflects the
+                    vastness of knowledge and exploration, as we dive deep into
+                    new horizons in technology.
+                    <br></br>
+                    With 4 dynamic sub-events, Techfusion 2k24 offers students
+                    the chance to explore creativity and face challenges that
+                    push them to their limits. Each ripple of innovation here
+                    creates waves of impact, as we sail through unbounded
+                    opportunities in this limitless ocean of knowledge.
                 </p>
             </div>
         </motion.div>

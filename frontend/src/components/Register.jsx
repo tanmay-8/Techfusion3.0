@@ -88,6 +88,10 @@ export default function Register() {
                 cloudverse: false,
                 bidtobuild: false,
             },
+            codeduetTeammate: "",
+            bidtobuildTeammate1: "",
+            bidtobuildTeammate2: "",
+            bidtobuildTeammate3: "",
             transaction: "",
             screenshot: null,
             collegeIdPhoto: null,
@@ -137,7 +141,6 @@ export default function Register() {
     const onSubmit = async (data) => {
         setIsLoading(true);
         try {
-            // Helper function to handle image upload
             const uploadImage = async (image) => {
                 const formData = new FormData();
                 formData.append("transactionImage", image);
@@ -176,6 +179,12 @@ export default function Register() {
                 transactionLink: transactionImageResponse.transactionLink,
                 transactionID: data.transaction,
                 IDCardLink: collegeIdImageResponse.transactionLink,
+                codeDuetTeammate: data.codeduetTeammate,
+                bidtoBuildTeammates: [
+                    data.bidtobuildTeammate1,
+                    data.bidtobuildTeammate2,
+                    data.bidtobuildTeammate3,
+                ].filter(Boolean),
             };
 
             const response = await fetch(formSubmitApi, {
@@ -517,6 +526,107 @@ export default function Register() {
                                 </p>
                             )}
                         </motion.div>
+
+                        {/* CodeDuet Teammate Field */}
+                        {selectedEvents.codeduet && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5 }}
+                                className="space-y-2"
+                            >
+                                <Label
+                                    htmlFor="codeduetTeammate"
+                                    className="text-gray-200 text-lg font-semibold"
+                                >
+                                    CodeDuet Teammate
+                                    <span className="text-sm text-gray-400 ml-3">
+                                        (Only leader should register)
+                                    </span>
+                                </Label>
+                                <Controller
+                                    name="codeduetTeammate"
+                                    control={control}
+                                    rules={{
+                                        required:
+                                            "Teammate name is required for CodeDuet",
+                                    }}
+                                    render={({ field }) => (
+                                        <Input
+                                            {...field}
+                                            id="codeduetTeammate"
+                                            placeholder="Enter your teammate's name"
+                                            className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200 placeholder:text-gray-400"
+                                        />
+                                    )}
+                                />
+                                {errors.codeduetTeammate && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.codeduetTeammate.message}
+                                    </p>
+                                )}
+                            </motion.div>
+                        )}
+
+                        {/* Bid to Build Teammate Fields */}
+                        {selectedEvents.bidtobuild && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5 }}
+                                className="space-y-4"
+                            >
+                                <Label className="text-gray-200 text-lg font-semibold">
+                                    Bid to Build Teammates{" "}
+                                    <span className="text-sm text-gray-400 ml-3">
+                                        (Only leader should register)
+                                    </span>
+                                </Label>
+                                {[
+                                    "bidtobuildTeammate1",
+                                    "bidtobuildTeammate2",
+                                    "bidtobuildTeammate3",
+                                ].map((field, index) => (
+                                    <div key={field} className="space-y-2">
+                                        <Label
+                                            htmlFor={field}
+                                            className="text-gray-200"
+                                        >
+                                            Teammate {index + 1}
+                                        </Label>
+                                        <Controller
+                                            name={field}
+                                            control={control}
+                                            rules={{
+                                                required:
+                                                    index === 0
+                                                        ? "At least one teammate is required for Bid to Build"
+                                                        : false,
+                                            }}
+                                            render={({
+                                                field: { onChange, value },
+                                            }) => (
+                                                <Input
+                                                    id={field}
+                                                    placeholder={`Enter teammate ${
+                                                        index + 1
+                                                    }'s name`}
+                                                    className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200 placeholder:text-gray-400"
+                                                    onChange={onChange}
+                                                    value={value}
+                                                />
+                                            )}
+                                        />
+                                        {errors[field] && (
+                                            <p className="text-red-500 text-sm">
+                                                {errors[field].message}
+                                            </p>
+                                        )}
+                                    </div>
+                                ))}
+                            </motion.div>
+                        )}
+
                         <motion.div
                             initial={{ opacity: 0, y: 50 }}
                             animate={{
