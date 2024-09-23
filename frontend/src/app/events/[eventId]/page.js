@@ -157,7 +157,7 @@ export default function Component({ params }) {
             contact: [
                 {
                     Name: "Atharv Khot",
-                    Contact: "8411026001",
+                    Contact: "8767865692",
                 },
             ],
             fees: "₹ 199 per team",
