@@ -258,8 +258,7 @@ export default function Register() {
                                 {
                                     id: "name",
                                     label: "Name",
-                                    placeholder:
-                                        "Enter your name",
+                                    placeholder: "Enter your name",
                                     validation: {
                                         required: "Name is required",
                                     },
@@ -445,6 +444,7 @@ export default function Register() {
                                             field.onChange(e.target.files[0])
                                         }
                                         className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200 placeholder:text-gray-400 cursor-pointer"
+                                        accept="image/*"
                                     />
                                 )}
                             />
@@ -730,6 +730,7 @@ export default function Register() {
                                                 )
                                             }
                                             className="bg-[#1a3c5b]/50 border-[#2a5075] text-gray-200 placeholder:text-gray-400 cursor-pointer"
+                                            accept="image/*"
                                         />
                                     )}
                                 />
