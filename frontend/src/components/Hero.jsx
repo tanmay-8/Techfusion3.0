@@ -40,7 +40,7 @@ const Hero = () => {
                     Techfusion 2K24
                 </h1>
                 <h2 className="text-xl sm:text-2xl md:text-3xl text-blue-100 font-light mb-8">
-                    Students' Association of Information Technology WCE, Sangli
+                    Student Association of Information Technology WCE, Sangli
                 </h2>
                 <Timer />
                 <ShinyButton />
