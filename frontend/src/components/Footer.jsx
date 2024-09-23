@@ -93,7 +93,7 @@ const Footer = () => {
                             <span>SAIT</span>
                         </h2>
                         <p className="mb-4">
-                            Beyond The Limitations, Next To The Perfection
+                            Beyond The Limitations, Next To Perfection
                         </p>
                         <div className="flex space-x-4 w-full justify-center md:justify-normal">
                             {socialLinks.map((link, index) => (
