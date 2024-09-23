@@ -49,7 +49,7 @@ export default function Component({ params }) {
                     Contact: "7507488201",
                 },
             ],
-            fees: "₹ 150 per person",
+            fees: "₹ 149 per person",
         },
         codeduet: {
             title: "Code Duet",
@@ -95,7 +95,7 @@ export default function Component({ params }) {
                     Contact: "7058519790",
                 },
             ],
-            fees: "₹ 150 per team",
+            fees: "₹ 149 per team",
         },
         codecrush: {
             title: "CodeCrush",
@@ -125,7 +125,7 @@ export default function Component({ params }) {
                     Contact: "7775841645",
                 },
             ],
-            fees: "₹ 50 per person",
+            fees: "₹ 49 per person",
         },
         bidtobuild: {
             title: "Bid 2 Build",
@@ -160,7 +160,7 @@ export default function Component({ params }) {
                     Contact: "8411026001",
                 },
             ],
-            fees: "₹ 200 per team",
+            fees: "₹ 199 per team",
         },
     };
 
