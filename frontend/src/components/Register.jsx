@@ -519,10 +519,13 @@ export default function Register() {
                                                         : ""
                                                 }`}
                                         >
-                                            {event.name}
+                                            {event.name} 
                                         </label>
+                                        
                                         <span className="text-cyan-400 font-semibold">
-                                            ₹{event.price}
+                                            {
+                                                (event.id==="cloudverse")?"Registrations Closed":`₹${event.price}`
+                                            }
                                         </span>
                                     </div>
                                 ))}
