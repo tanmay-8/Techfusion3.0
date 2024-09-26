@@ -503,12 +503,21 @@ export default function Register() {
                                                     onCheckedChange={
                                                         field.onChange
                                                     }
+                                                    disabled={
+                                                        event.id ===
+                                                        "cloudverse"
+                                                    }
                                                 />
                                             )}
                                         />
                                         <label
                                             htmlFor={event.id}
-                                            className="text-sm font-medium text-gray-200 flex-grow"
+                                            className={`text-sm font-medium text-gray-200 flex-grow
+                                                ${
+                                                    event.id === "cloudverse"
+                                                        ? "line-through text-gray-400"
+                                                        : ""
+                                                }`}
                                         >
                                             {event.name}
                                         </label>
