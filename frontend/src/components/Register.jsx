@@ -75,6 +75,7 @@ export default function Register() {
         handleSubmit,
         formState: { errors },
         watch,
+        setValue,
     } = useForm({
         defaultValues: {
             name: "",
@@ -219,6 +220,18 @@ export default function Register() {
 
     const closeAlert = () => {
         setAlertState((prev) => ({ ...prev, isOpen: false }));
+    };
+
+    const handleEventSelection = (eventId) => {
+        const exclusiveEvents = ["codeduet", "cloudverse", "bidtobuild"];
+        if (exclusiveEvents.includes(eventId)) {
+            exclusiveEvents.forEach((event) => {
+                if (event !== eventId) {
+                    setValue(`events.${event}`, false);
+                }
+            });
+        }
+        setValue(`events.${eventId}`, !selectedEvents[eventId]);
     };
 
     return (
@@ -465,6 +478,10 @@ export default function Register() {
                         >
                             <Label className="text-gray-200 text-lg font-semibold">
                                 Select Events
+                                <span className="text-gray-400 text-sm font-normal ml-2">
+                                    ( Only one of CodeDuet, Bid2Build or
+                                    CloudVerse can be selected )
+                                </span>
                             </Label>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {[
@@ -500,32 +517,26 @@ export default function Register() {
                                                 <Checkbox
                                                     id={event.id}
                                                     checked={field.value}
-                                                    onCheckedChange={
-                                                        field.onChange
-                                                    }
-                                                    disabled={
-                                                        event.id ===
-                                                        "cloudverse"
+                                                    onCheckedChange={() =>
+                                                        handleEventSelection(
+                                                            event.id
+                                                        )
                                                     }
                                                 />
                                             )}
                                         />
                                         <label
                                             htmlFor={event.id}
-                                            className={`text-sm font-medium text-gray-200 flex-grow
-                                                ${
-                                                    event.id === "cloudverse"
-                                                        ? "line-through text-gray-400"
-                                                        : ""
-                                                }`}
+                                            className="text-sm font-medium text-gray-200 flex-grow"
                                         >
-                                            {event.name} 
+                                            {event.name}
+                                            <span className="text-gray-400 text-sm ml-1">
+                                                {event.id === "cloudverse" &&
+                                                    "(Date is 5th October)"}
+                                            </span>
                                         </label>
-                                        
                                         <span className="text-cyan-400 font-semibold">
-                                            {
-                                                (event.id==="cloudverse")?"Registrations Closed":`₹${event.price}`
-                                            }
+                                            ₹{event.price}
                                         </span>
                                     </div>
                                 ))}
@@ -539,7 +550,6 @@ export default function Register() {
                             )}
                         </motion.div>
 
-                        {/* CodeDuet Teammate Field */}
                         {selectedEvents.codeduet && (
                             <motion.div
                                 initial={{ opacity: 0, y: 50 }}
@@ -580,7 +590,6 @@ export default function Register() {
                             </motion.div>
                         )}
 
-                        {/* Bid to Build Teammate Fields */}
                         {selectedEvents.bidtobuild && (
                             <motion.div
                                 initial={{ opacity: 0, y: 50 }}
@@ -777,4 +786,8 @@ export default function Register() {
             </motion.div>
         </div>
     );
+}
+
+{
+    /*  */
 }

@@ -36,11 +36,11 @@ const Hero = () => {
                     hidden: { opacity: 0, y: 20 },
                 }}
             >
-                <h1 className="text-5xl sm:text-7xl md:text-8xl font-extrabold text-white mb-4">
+                <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold md:font-extrabold text-white mb-4">
                     Techfusion 2K24
                 </h1>
                 <h2 className="text-xl sm:text-2xl md:text-3xl text-blue-100 font-light mb-8">
-                    Student Association of Information Technology WCE, Sangli
+                    Students' Association of Information Technology WCE, Sangli
                 </h2>
                 <Timer />
                 <ShinyButton />
