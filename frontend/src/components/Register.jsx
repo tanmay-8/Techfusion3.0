@@ -522,19 +522,26 @@ export default function Register() {
                                                             event.id
                                                         )
                                                     }
+                                                    disabled={
+                                                        event.id != "codecrush"
+                                                    }
                                                 />
                                             )}
                                         />
                                         <label
                                             htmlFor={event.id}
-                                            className="text-sm font-medium text-gray-200 flex-grow"
+                                            className={`text-sm font-medium text-gray-200 flex-grow ${
+                                                event.id != "codecrush" &&
+                                                "line-through"
+                                            }`}
                                         >
                                             {event.name}
-                                            <span className="text-gray-400 text-sm ml-1">
-                                                {event.id === "cloudverse" &&
-                                                    "(Date is 5th October)"}
-                                            </span>
                                         </label>
+                                        {event.id != "codecrush" && (
+                                            <span className="text-gray-500 text-sm ml-2">
+                                                {"(Registrations Closed)"}
+                                            </span>
+                                        )}
                                         <span className="text-cyan-400 font-semibold">
                                             ₹{event.price}
                                         </span>
