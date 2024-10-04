@@ -239,7 +239,7 @@ export default function Register() {
             className="overflow-hidden w-full px-4 md:px-8 py-24 space-y-6 font-body flex flex-col justify-center items-center"
             id="registerForm"
         >
-            <CustomAlert
+            {/* <CustomAlert
                 isOpen={alertState.isOpen}
                 onClose={closeAlert}
                 title={alertState.title}
@@ -790,6 +790,16 @@ export default function Register() {
                         </motion.div>
                     </div>
                 </form>
+            </motion.div> */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="flex justify-center items-center bg-[#1a3c5b]/30 shadow-lg shadow-[#132e47]/50 backdrop-blur-xl border-none rounded-2xl overflow-hidden p-4 md:p-6  py-12"
+            >
+                <h1 className="text-2xl md:text-4xl font-bold text-center text-white font-title mb-4">
+                    Registrations are closed. Stay tuned for more updates!
+                </h1>
             </motion.div>
         </div>
     );
