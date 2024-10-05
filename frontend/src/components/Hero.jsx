@@ -79,7 +79,7 @@ const Timer = () => {
             {Object.entries(time).map(([key, value]) => (
                 <div key={key} className="flex flex-col items-center">
                     <div className="text-4xl sm:text-5xl font-bold text-white bg-[#308de4]/40 bg-opacity-50 rounded-lg p-3 backdrop-blur-sm">
-                        {value.toString().padStart(2, "0")}
+                        00
                     </div>
                     <div className="text-blue-100 text-sm mt-2 capitalize">
                         {key}
